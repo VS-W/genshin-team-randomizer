@@ -1,3 +1,6 @@
+# Genshin Impact Team Randomizer
+Yet another randomizer for Genshin Impact teams. Create multiple teams without repeated characters with a host of available filters/restrictions, generate a target (boss, domain, etc.) for each team, create co-op overworld teams (i.e. with duplicate characters on a single team), and restrict what weapons you're allowed to use. 
+
 ### Usage:
 Uncheck any characters you don't have or specifically don't want to include in the pool of possible characters.
 Choose a type of team to generate, and optionally a target to use that team against. For filtering purposes, choose whether or not the Traveler should be associated with the region from where they obtained their elements (e.g. Anemo Traveler = Mondstadt, Geo Traveler = Liyue).
@@ -140,3 +143,6 @@ One of:
 	(text input, single letter)
 
 ###### Character data/font/images belong to Hoyoverse, mostly extracted from the [character list on the unofficial wiki](https://genshin-impact.fandom.com/wiki/Character/List) since they have a neat table already.
+
+###### [Fitty](https://github.com/rikschennink/fitty) used for resizing text in the character cards.
+###### [pico](https://github.com/picocss/pico) use for styling components.
