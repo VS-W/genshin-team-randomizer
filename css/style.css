@@ -1,0 +1,269 @@
+:root:not([data-theme]) {
+    --pico-background-color: #111;
+}
+
+footer {
+	width: 75%;
+	margin-left: 12.5%;
+	font-size: calc(var(--pico-font-size) * 0.75);
+	text-align: center;
+}
+hr {
+	margin-top: 0;
+}
+h1, h2,  h6 {
+	text-align: center;
+}
+input[type="date"] {
+	padding:
+		var(--pico-form-element-spacing-vertical)
+		calc(var(--pico-form-element-spacing-horizontal) * 0.25)
+		var(--pico-form-element-spacing-vertical)
+		calc(var(--pico-form-element-spacing-horizontal) * 0.75) !important;
+}
+
+.character-card-container {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+	flex-wrap: wrap;
+}
+.character-card {
+	display: inline-block;
+	padding: 0;
+	width: 20%;
+	max-width: 8em;
+	border: none;
+	border-radius: 5%;
+	overflow: hidden;
+	margin: 0.1em;
+}
+.character-card-profile-4 {
+	background: linear-gradient(to top, #9778c9, #686090);
+}
+.character-card-profile-5 {
+	background: linear-gradient(to top, #dd9351, #986a43);
+}
+.character-card-icon-container {
+	position: relative;
+}
+.character-card-icon {
+	position: absolute;
+	top: 0.2em;
+	width: 25%;
+	max-width: 2em;
+}
+.character-card-icon-element {
+	left: 0.2em;
+}
+.character-card-icon-weapon {
+	right: 0.2em;
+	opacity: 0.75;
+}
+.character-card-title {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 2em;
+	width: 85%;
+	margin-left: 7.5%;
+}
+.character-card-filtered {
+	filter: grayscale(0.5) brightness(1) opacity(0.85);
+}
+.character-card-title-filtered {
+	color: #bbb;
+	text-decoration: line-through;
+}
+.character-card-disabled {
+	filter: grayscale(0.5) brightness(.75) opacity(0.75);
+	background-color: red;
+}
+
+#team-type-selection-buttons button {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 33.33%;
+}
+#team-type-selection-info {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	margin-bottom: 1em;
+}
+
+.settings-container {
+	margin-bottom: 0;
+}
+.settings-container fieldset {
+	margin-bottom: calc(var(--pico-spacing) * 0.5);
+}
+.settings-container fieldset legend {
+	margin: 0;
+}
+.settings-container fieldset legend details summary {
+	font-size: var(--pico-font-size);
+	line-height: var(--pico-font-size);
+}
+.settings-container fieldset legend details span {
+	font-size: calc(var(--pico-font-size) * 0.75);
+}
+.settings-text {
+	font-size: calc(var(--pico-font-size) * 1.25);
+	margin: 1.5rem 0 !important;
+}
+
+#number-of-teams {
+	width: 50%;
+}
+
+.multi-img-selection {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	flex-wrap: wrap;
+}
+.toggle-image-checkbox {
+	width: 3.5rem;
+	height: 3.5rem;
+	margin: 0.75rem 0.5rem;
+}
+.toggle-image-checkbox input {
+	display: none;
+}
+.toggle-image-checkbox label {
+	width: 3.5rem;
+	height: 3.5rem;
+	background-size: 2.5rem;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-origin: content-box;
+	filter: grayscale(1) brightness(0.6) opacity(0.6);
+	background-color: rgba(0, 0, 0, 0.1);
+}
+.toggle-image-checkbox > input:checked + label {
+	filter: none;
+	background-color: rgba(0, 0, 0, 0.5);
+}
+
+.stars {
+	width: 6rem;
+	height: 2.5rem;
+}
+.stars label {
+	width: 6rem;
+	height: 2.5rem;
+}
+.stars-1 label {
+	background-size: 1.25rem;
+}
+.stars-2 label {
+	background-size: 2rem;
+}
+.stars-3 label {
+	background-size: 3rem;
+}
+.stars-4 label {
+	background-size: 4rem;
+}
+.stars-5 label {
+	background-size: 5rem;
+}
+.hidden {
+	visibility: hidden;
+}
+.removed {
+	display: none;
+}
+
+.multi-img-text-selection {
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+}
+.toggle-img-text-checkbox {
+	padding: 0.25rem;
+	width: 12rem;
+}
+.toggle-img-text-checkbox input {
+	display: none;
+}
+.toggle-img-text-checkbox label span {
+	padding-left: 2.5em;
+}
+.toggle-img-text-checkbox label {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	background-origin: content-box;
+	background-position: left;
+	background-repeat: no-repeat;
+	background-size: 2.5em;
+	filter: grayscale(1) brightness(0.6) opacity(0.6);
+}
+.toggle-img-text-checkbox > input:checked + label {
+	filter: none;
+}
+
+.filter-label {
+	text-align: center;
+}
+.filter-label-bottom-margin {
+	margin-bottom: 0.5rem;
+}
+
+.multi-text-selection {
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+}
+.toggle-text-checkbox {
+	padding: 0.25rem;
+	width: 10rem;
+}
+.toggle-text-checkbox input {
+	display: none;
+}
+.toggle-text-checkbox label {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	padding: 0.2rem 0.5rem;
+	filter: grayscale(1) brightness(0.6) opacity(0.6);
+}
+.toggle-text-checkbox > input:checked + label {
+	filter: none;
+}
+
+.filters-group {
+	width: 50%;
+}
+.filters-group-split {
+	width: 50%;
+}
+.filter-container {
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+}
+.filter-container-smaller {
+	padding-top: 1rem;
+	margin-left: 10%;
+	width: 80%;
+	align-items: center;
+}
+.space-evenly {
+	justify-content: space-evenly;
+}
+.select-button {
+	width: 10rem;
+}
+
+@media (max-width: 1024px) {
+	.filters-group {
+		width: 100%;
+	}
+}

@@ -1,0 +1,429 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="color-scheme" content="light dark">
+	<title>Test</title>
+	<link rel="stylesheet" href="css/pico.indigo.css">
+	<link rel="stylesheet" href="css/style.css">
+	<script src="assets/fitty.min.js"></script>
+</head>
+
+<body>
+	<main class="container">
+		<h1>Heading</h1>
+		<div id="team-type-selection-container">
+			<div id="team-type-selection-buttons" role="group">
+				<button><span>Normal</span></button>
+				<button class="secondary"><span>Abyss</span></button>
+				<button class="secondary"><span>Co-Op<sup>*</sup></span></button>
+			</div>
+			<div id="team-type-selection-info">
+				<span id="team-type-selection-normal">(4 unique characters)</span>
+				<span id="team-type-selection-abyss" class="removed">(8 unique characters)</span>
+				<span id="team-type-selection-coop" class="removed">(Overworld* co-op - 4 characters, but can include duplicates)</span>
+			</div>
+		</div>
+		<hr>
+		<details class="settings-container" open>
+			<summary class="settings-text">Traveler Settings:</summary>
+			<div class="grid">
+				<div>
+					<fieldset>
+						<legend>
+							<details>
+								<summary>Traveler Element = Region?</summary>
+								<span>
+									If selected, Anemo Traveler = Mondstadt, Geo Traveler = Liyue, etc., otherwise their region will be considered "none".
+								</span>
+							</details>
+						</legend>
+						<label class="en-btn">
+							<input name="traveler-region" type="checkbox" role="switch" checked>
+							<span>Enabled</span>
+						</label>
+					</fieldset>
+					<fieldset>
+						<legend>
+							<details>
+								<summary>Single Element Traveler?</summary>
+								<span>
+									Only applies if multiple teams are being generated.<br><br>If checked, the Traveler will be considered a single unique character that may only appear once, e.g. if Electro Traveler is randomly selected, then Anemo/Geo/Hydro/Pyro/Cryo will be removed from the pool of possible characters going forward. Otherwise, with the exception of Abyss paired teams, a Traveler of each element will exist in the pool of possible characters, e.g. team 1 may have Anemo Traveler, then team 2 may have any selected Traveler except Anemo.
+								</span>
+							</details>
+						</legend>
+						<label class="en-btn" aria-disabled="true">
+							<input name="traveler-multielement" type="checkbox" role="switch" checked>
+							<span>Enabled</span>
+						</label>
+					</fieldset>
+				</div>
+				<div>
+					<fieldset>
+						<legend>
+							<details>
+								<summary>Which Traveler?</summary>
+								<span>Which Traveler do you have? You can choose both if you're generating co-op teams - if it lands on Aether, for example, then only someone who actually has Aether can fill that spot.</span>
+							</details>
+						</legend>
+						<label>
+							<input type="radio" name="traveler" checked value="Lumine">
+							<span>Lumine</span>
+						</label>
+						<label>
+							<input type="radio" name="traveler" value="Aether">
+							<span>Aether</span>
+						</label>
+						<label>
+							<input type="radio" name="traveler" value="Both">
+							<span>Both</span>
+						</label>
+					</fieldset>
+				</div>
+			</div>
+		</details>
+		<hr>
+		<details class="settings-container" open>
+			<summary class="settings-text">Optional:</summary>
+			<div class="grid">
+				<div>
+					<fieldset>
+						<legend>
+							<details>
+								<summary># of Teams to Generate</summary>
+								<span>
+									<strong>Optional:</strong> Generate multiple teams.
+									<br><br>If there are 80 characters available, it can generate a maximum of 20 unique normal teams or 10 unique Abyss team pairs. Useful for continuous challenges by preventing repeat characters across multiple sequential teams, e.g. having a character on the first team means they won't be available for any subsequent teams.
+								</span>
+							</details>
+						</legend>
+						<fieldset>
+							<input id="number-of-teams" type="number" name="number-of-teams" placeholder="# of Teams" value="1">
+						</fieldset>
+					</fieldset>
+					<fieldset>
+						<legend>
+							<details>
+								<summary>Target?</summary>
+								<span>
+									<strong>Optional:</strong> Generate a random target to fight.
+								</span>
+							</details>
+						</legend>
+						<fieldset id="target-selection">
+							<label>
+								<input type="checkbox" name="target-overworld">
+								Overworld boss
+							</label>
+							<label>
+								<input type="checkbox" name="target-domain">
+								Domain
+							</label>
+							<label>
+								<input type="checkbox" name="target-abyss">
+								Abyss floor (9 - 12)
+							</label>
+						</fieldset>
+					</fieldset>
+					<fieldset>
+						<legend>
+							<details>
+								<summary>New target for each team?</summary>
+								<span>
+									Only applies if multiple teams are being generated.<br><br>
+									<strong>Optional:</strong> Assign a new target for each additional team generated.
+								</span>
+							</details>
+						</legend>
+						<fieldset>
+							<label class="en-btn" aria-disabled="true">
+								<input name="target-multiteam" type="checkbox" role="switch">
+								<span>Enable</span>
+							</label>
+						</fieldset>
+					</fieldset>
+				</div>
+				<fieldset>
+					<legend>
+						<details>
+							<summary>Weapon Rarity Restrictions</summary>
+							<span>
+								<strong>Disabled:</strong> Don't generate weapon restrictions.
+								<br><br>
+								<strong>Random (single):</strong> If checked, will pick one of the selected rarities and all characters must use that rarity, e.g. all characters must use 3 star weapons.
+								<br><br>
+								<strong>Random (varied):</strong> If checked, will pick one of the selected rarities for each character separately, e.g. character 1 gets a 3 star weapon, character 2 get a 5 star, character 3 gets a 2 star, and character 4 gets a 3 star.
+							</span>
+						</details>
+					</legend>
+					<fieldset>
+						<label>
+							<input type="radio" name="random-weapon-type" value="disabled" checked>
+							Disabled
+						</label>
+						<label>
+							<input type="radio" name="random-weapon-type" value="random-single">
+							Random (single)
+						</label>
+						<label>
+							<input type="radio" name="random-weapon-type" value="random-varied">
+							Random (varied)
+						</label>
+					</fieldset>
+					<div id="random-weapon-stars" class="multi-img-selection">
+						<div class="toggle-image-checkbox stars stars-1">
+							<input type="checkbox" id="star-rng-1" value="1" checked>
+							<label class="outline" role="button" for="star-rng-1" style="background-image: url('assets/icons/Icon_1_Star.png')"></label>
+						</div>
+						<div class="toggle-image-checkbox stars stars-2">
+							<input type="checkbox" id="star-rng-2" value="2" checked>
+							<label class="outline" role="button" for="star-rng-2" style="background-image: url('assets/icons/Icon_2_Stars.png')"></label>
+						</div>
+						<div class="toggle-image-checkbox stars stars-3">
+							<input type="checkbox" id="star-rng-3" value="3" checked>
+							<label class="outline" role="button" for="star-rng-3" style="background-image: url('assets/icons/Icon_3_Stars.png')"></label>
+						</div>
+						<div class="toggle-image-checkbox stars stars-4">
+							<input type="checkbox" id="star-rng-4" value="4" checked>
+							<label class="outline" role="button" for="star-rng-4" style="background-image: url('assets/icons/Icon_4_Stars.png')"></label>
+						</div>
+						<div class="toggle-image-checkbox stars stars-5">
+							<input type="checkbox" id="star-rng-5" value="5" checked>
+							<label class="outline" role="button" for="star-rng-5" style="background-image: url('assets/icons/Icon_5_Stars.png')"></label>
+						</div>
+					</div>
+				</fieldset>
+			</div>
+		</details>
+
+		<br>
+		<hr>
+		<h2>Filters</h2>
+		<div class="filter-container space-evenly">
+			<button id="filter-select-all" class="select-button">All</button>
+			<button id="filter-select-none" class="select-button outline secondary">None</button>
+		</div>
+		<div class="filter-container">
+			<div class="filters-group">
+				<br>
+				<div class="filter-label">Element</div>
+				<div id="element-filter" class="multi-img-selection">
+					<div class="toggle-image-checkbox">
+						<input type="checkbox" id="element-anemo" checked>
+						<label class="outline" role="button" for="element-anemo" style="background-image: url('assets/icons/anemo.png')"></label>
+					</div>
+					<div class="toggle-image-checkbox">
+						<input type="checkbox" id="element-geo" checked>
+						<label class="outline" role="button" for="element-geo" style="background-image: url('assets/icons/geo.png')"></label>
+					</div>
+					<div class="toggle-image-checkbox">
+						<input type="checkbox" id="element-electro" checked>
+						<label class="outline" role="button" for="element-electro" style="background-image: url('assets/icons/electro.png')"></label>
+					</div>
+					<div class="toggle-image-checkbox">
+						<input type="checkbox" id="element-dendro" checked>
+						<label class="outline" role="button" for="element-dendro" style="background-image: url('assets/icons/dendro.png')"></label>
+					</div>
+					<div class="toggle-image-checkbox">
+						<input type="checkbox" id="element-hydro" checked>
+						<label class="outline" role="button" for="element-hydro" style="background-image: url('assets/icons/hydro.png')"></label>
+					</div>
+					<div class="toggle-image-checkbox">
+						<input type="checkbox" id="element-pyro" checked>
+						<label class="outline" role="button" for="element-pyro" style="background-image: url('assets/icons/pyro.png')"></label>
+					</div>
+					<div class="toggle-image-checkbox">
+						<input type="checkbox" id="element-cryo" checked>
+						<label class="outline" role="button" for="element-cryo" style="background-image: url('assets/icons/cryo.png')"></label>
+					</div>
+				</div>
+				<div class="filter-label">Weapon Type</div>
+				<div id="weapon-filter" class="multi-img-selection">
+					<div class="toggle-image-checkbox">
+						<input type="checkbox" id="weapon-sword" checked>
+						<label class="outline" role="button" for="weapon-sword" style="background-image: url('assets/icons/sword.png')"></label>
+					</div>
+					<div class="toggle-image-checkbox">
+						<input type="checkbox" id="weapon-bow" checked>
+						<label class="outline" role="button" for="weapon-bow" style="background-image: url('assets/icons/bow.png')"></label>
+					</div>
+					<div class="toggle-image-checkbox">
+						<input type="checkbox" id="weapon-claymore" checked>
+						<label class="outline" role="button" for="weapon-claymore" style="background-image: url('assets/icons/claymore.png')"></label>
+					</div>
+					<div class="toggle-image-checkbox">
+						<input type="checkbox" id="weapon-polearm" checked>
+						<label class="outline" role="button" for="weapon-polearm" style="background-image: url('assets/icons/polearm.png')"></label>
+					</div>
+					<div class="toggle-image-checkbox">
+						<input type="checkbox" id="weapon-catalyst" checked>
+						<label class="outline" role="button" for="weapon-catalyst" style="background-image: url('assets/icons/catalyst.png')"></label>
+					</div>
+				</div>
+				<div class="filter-label">Rarity</div>
+				<div id="rarity-filter" class="multi-img-selection">
+					<div class="toggle-image-checkbox stars stars-4">
+						<input type="checkbox" id="rarity-4" checked>
+						<label class="outline" role="button" for="rarity-4" style="background-image: url('assets/icons/Icon_4_Stars.png')"></label>
+					</div>
+					<div class="toggle-image-checkbox stars stars-5">
+						<input type="checkbox" id="rarity-5" checked>
+						<label class="outline" role="button" for="rarity-5" style="background-image: url('assets/icons/Icon_5_Stars.png')"></label>
+					</div>
+				</div>
+			</div>
+			<div class="filters-group">
+				<br>
+				<div class="filter-label filter-label-bottom-margin">Regions</div>
+				<div id="region-filter" class="multi-img-text-selection">
+					<div class="toggle-img-text-checkbox">
+						<input class="toggle-img-text-checkbox" type="checkbox" id="region-mondstadt" checked>
+						<label class="outline" role="button" for="region-mondstadt" style="background-image: url('assets/icons/mondstadt.png')"><span>Mondstadt</span></label>
+					</div>
+				
+					<div class="toggle-img-text-checkbox">
+						<input type="checkbox" id="region-liyue" checked>
+						<label class="outline" role="button" for="region-liyue" style="background-image: url('assets/icons/liyue.png')"><span>Liyue</span></label>
+					</div>
+				
+					<div class="toggle-img-text-checkbox">
+						<input type="checkbox" id="region-inazuma" checked>
+						<label class="outline" role="button" for="region-inazuma" style="background-image: url('assets/icons/inazuma.png')"><span>Inazuma</span></label>
+					</div>
+				
+					<div class="toggle-img-text-checkbox">
+						<input type="checkbox" id="region-sumeru" checked>
+						<label class="outline" role="button" for="region-sumeru" style="background-image: url('assets/icons/sumeru.png')"><span>Sumeru</span></label>
+					</div>
+				
+					<div class="toggle-img-text-checkbox">
+						<input type="checkbox" id="region-fontaine" checked>
+						<label class="outline" role="button" for="region-fontaine" style="background-image: url('assets/icons/fontaine.png')"><span>Fontaine</span></label>
+					</div>
+				
+					<div class="toggle-img-text-checkbox outline">
+						<input type="checkbox" id="region-natlan" checked>
+						<label class="outline" role="button" for="region-natlan" style="background-image: url('assets/icons/natlan.png')"><span>Natlan</span></label>
+					</div>
+				
+					<div class="toggle-img-text-checkbox outline">
+						<input type="checkbox" id="region-snezhnaya" checked>
+						<label class="outline" role="button" for="region-snezhnaya" style="background-image: url('assets/icons/snezhnaya.png')"><span>Snezhnaya</span></label>
+					</div>
+				
+					<div class="toggle-img-text-checkbox outline">
+						<input type="checkbox" id="region-none" checked>
+						<label class="outline" role="button" for="region-none" style="background-image: url('assets/icons/none.png')"><span>None</span></label>
+					</div>
+				</div>
+				<br>
+				<div class="filter-label filter-label-bottom-margin">Models</div>
+				<div id="model-filter" class="multi-text-selection">
+					<div role="group">
+						<div class="toggle-text-checkbox">
+							<input class="toggle-text-checkbox" type="checkbox" id="model-tall-female" checked>
+							<label class="outline" role="button" for="model-tall-female"><span>Tall ♀️</span></label>
+						</div>
+						<div class="toggle-text-checkbox">
+							<input class="toggle-text-checkbox" type="checkbox" id="model-medium-female" checked>
+							<label class="outline" role="button" for="model-medium-female"><span>Medium ♀️</span></label>
+						</div>
+						<div class="toggle-text-checkbox">
+							<input class="toggle-text-checkbox" type="checkbox" id="model-short-female" checked>
+							<label class="outline" role="button" for="model-short-female"><span>Short ♀️</span></label>
+						</div>
+					</div>
+					<div role="group">
+						<div class="toggle-text-checkbox">
+							<input class="toggle-text-checkbox" type="checkbox" id="model-tall-male" checked>
+							<label class="outline" role="button" for="model-tall-male"><span>Tall ♂️</span></label>
+						</div>
+						<div class="toggle-text-checkbox">
+							<input class="toggle-text-checkbox" type="checkbox" id="model-medium-male" checked>
+							<label class="outline" role="button" for="model-medium-male"><span>Medium ♂️</span></label>
+						</div>
+						<div class="toggle-text-checkbox">
+							<input class="toggle-text-checkbox" type="checkbox" id="model-short-male" checked>
+							<label class="outline" role="button" for="model-short-male"><span>Short ♂️</span></label>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="filters-group">
+				<br>
+				<div class="filter-label filter-label-bottom-margin">Patch <small>(inclusive)</small></div>
+				<div class="filter-container filter-container-smaller">
+					<div class="filters-group-split">
+						<fieldset>
+							<label>
+								<input type="radio" name="patch" value="patch-after" checked>
+								After
+							</label>
+							<label>
+								<input type="radio" name="patch" value="patch-before">
+								Before
+							</label>
+							<label>
+								<input type="radio" name="patch" value="patch-between">
+								Between
+							</label>
+						</fieldset>
+					</div>
+					<div class="filters-group-split">
+						<select class="patch-select" id="patch-select-1" name="patch-select-1"></select>
+						<div id="patch-select-2-container" class="hidden">
+							<h6>and...</h6>
+							<select class="patch-select" id="patch-select-2" name="patch-select-2"></select>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="filters-group">
+				<br>
+				<div class="filter-label filter-label-bottom-margin">Release Date <small>(inclusive)</small></div>
+				<div class="filter-container filter-container-smaller">
+					<div class="filters-group-split">
+						<fieldset>
+							<label>
+								<input type="radio" name="release-date" value="release-date-after">
+								After
+							</label>
+							<label>
+								<input type="radio" name="release-date" value="release-date-before">
+								Before
+							</label>
+							<label>
+								<input type="radio" name="release-date" value="release-date-between" checked>
+								Between
+							</label>
+						</fieldset>
+					</div>
+					<div class="filters-group-split">
+						<input type="date" id="release-date-select-1" name="release-date-select-1">
+						<div id="release-date-select-2-container" class="hidden">
+							<h6>and...</h6>
+							<input type="date" id="release-date-select-2" name="release-date-select-2">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<br>
+		<hr>
+		<h2>Characters</h2>
+		<div class="filter-container space-evenly">
+			<button id="character-select-all" class="select-button">All</button>
+			<button id="character-select-none" class="select-button outline secondary">None</button>
+		</div>
+		<br>
+		<div class="character-card-container"></div>
+	</main>
+	<footer>Character data/font/images belong to Hoyoverse, mostly extracted from the <a href="https://genshin-impact.fandom.com/wiki/Character/List">character list on the unofficial wiki</a> since they have a neat table already.</footer>
+
+	<script src="assets/main.js"></script>
+</body>
+
+</html>
