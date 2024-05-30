@@ -139,10 +139,8 @@ One of:
 
 ### Name
 + Name starts with...
++ Name includes...
 
-	(text input, single letter)
+	(text input)
 
-###### Character data/font/images belong to Hoyoverse, mostly extracted from the [character list on the unofficial wiki](https://genshin-impact.fandom.com/wiki/Character/List) since they have a neat table already.
-
-###### [Fitty](https://github.com/rikschennink/fitty) used for resizing text in the character cards.
-###### [pico](https://github.com/picocss/pico) use for styling components.
+###### Character data/font/images belong to Hoyoverse, mostly extracted from the [character list on the unofficial wiki](https://genshin-impact.fandom.com/wiki/Character/List) since they have a neat table already. [Fitty](https://github.com/rikschennink/fitty) used for resizing text in the character cards. [pico](https://github.com/picocss/pico) used for styling components.

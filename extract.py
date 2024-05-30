@@ -3,10 +3,11 @@ import datetime, json, os, time
 from bs4 import BeautifulSoup as bs
 import requests
 
-def fetch(url, target, img=False, write_html=False):
+def fetch(url, target, write=False):
 	if os.path.exists(target):
 		print("Target exists, skipping download...")
-		return
+		with open(target, "r", encoding="utf-8") as f:
+			return f.read()
 
 	response = requests.get(url, headers={
 		"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
@@ -15,7 +16,7 @@ def fetch(url, target, img=False, write_html=False):
 	time.sleep(0.5)
 
 	if response.status_code == 200:
-		if img:
+		if write:
 			print("Writing to " + target)
 			with open(target, "wb") as f:
 				f.write(response.content)
@@ -33,8 +34,113 @@ if os.path.exists(output_dir + "icons"):
 else:
     os.makedirs(output_dir + "icons")
 
+# domain_list_url = "https://genshin-impact.fandom.com/wiki/Domain/List"
+# target_file = datetime.datetime.now().strftime("%Y%m%d") + "-domain.html"
+
+# html = fetch(domain_list_url, output_dir + target_file, write=True)
+# tables = bs(html, features="html.parser").findAll(class_="article-table")
+# headings = bs(html, features="html.parser").findAll("h2")[1:]
+# for table, heading in zip(tables, headings):
+# 	heading = heading.text.replace("[", "").replace("]", "")
+# 	if not "Quest Domain" in heading and not "Event Domain" in heading and not "Trouce Domain" in heading:
+# 		for row in table.findAll("tr")[1:]:
+# 			outputline = [heading]
+# 			for link in row.findAll("a"):
+# 				if len(link.text):
+# 					outputline.append(link.text)
+# 			print(outputline)
+
+# Manually mapped existing bosses with their full art / subtitles.
+# Don't want to pull a whole extra page for each boss unnecessarily.
+# Some of the bosses are mapped to their expected names rather than
+# the order listed on the wiki since that appears to differ from
+# page to page.
+# Unmapped bosses will keep their data from the base wiki page.
+weekly_bosses = {
+	"The Knave": {
+		"fullart": "The_Knave.png",
+		"subtitle": "Cinder of Two Worlds' Flames"
+	},
+	"All-Devouring Narwhal": {
+		"fullart": "All-Devouring_Narwhal.png",
+		"subtitle": "Visitor from the Far Side of the Sea of Stars"
+	},
+	"Guardian of Apep's Oasis": {
+		"fullart": "Warden_of_Oasis_Prime.png",
+		"subtitle": "Evolved From an Apocalyptic Millennium"
+	},
+	"Everlasting Lord of Arcane Wisdom": {
+		"fullart": "Everlasting_Lord_of_Arcane_Wisdom.png",
+		"subtitle": "Shouki no Kami, the Prodigal"
+	},
+	"Magatsu Mitake Narukami no Mikoto": {
+		"fullart": "Magatsu_Mitake_Narukami_no_Mikoto.png",
+		"subtitle": "Raiden no Inazuma Tono"
+	},
+	"La Signora": {
+		"fullart": "Signora.png",
+		"subtitle": "Crimson Witch of Embers"
+	},
+	"Azhdaha": {
+		"fullart": "Azhdaha.png",
+		"subtitle": "Sealed Lord of Vishaps"
+	},
+	"Childe": {
+		"fullart": "Childe.png",
+		"subtitle": "Delusion Unleashed"
+	},
+	"Stormterror Dvalin": {
+		"fullart": "Dvalin.png",
+		"subtitle": "Erstwhile King of the Skies"
+	},
+	"Andrius": {
+		"fullart": "Andrius.png",
+		"subtitle": "Dominator of Wolves"
+	}
+}
+
+weekly_boss_list_url = "https://genshin-impact.fandom.com/wiki/Weekly_Boss"
+target_file = datetime.datetime.now().strftime("%Y%m%d") + "-weekly.html"
+
+html = fetch(weekly_boss_list_url, output_dir + target_file, write=True)
+table = bs(html, features="html.parser").findAll(class_="wikitable")[1]
+for row in table.findAll("tr")[1:]:
+	outputline = []
+	for link in row.findAll("a"):
+		if len(link.text):
+			outputline.append(link.text)
+	if outputline[0].strip() != "Trounce Domains":
+		# print(outputline)
+		if not outputline[0] in weekly_bosses:
+			weekly_bosses[outputline[0]] = {
+				"fullart": "",
+				"subtitle": ""
+			}
+			print("added:", outputline[0])
+		weekly_bosses[outputline[0]]["location"] = outputline[1]
+		weekly_bosses[outputline[0]]["region"] = outputline[2]
+		print(outputline[0], weekly_bosses[outputline[0]])
+
+# overworld_boss_list_url = "https://genshin-impact.fandom.com/wiki/Normal_Boss"
+# target_file = datetime.datetime.now().strftime("%Y%m%d") + "-normal.html"
+
+# html = fetch(overworld_boss_list_url, output_dir + target_file, write=True)
+# tables = bs(html, features="html.parser").findAll(class_="article-table")
+# headings = bs(html, features="html.parser").findAll("h2")[1:]
+# for table, heading in zip(tables, headings):
+# 	heading = heading.text.replace("[", "").replace("]", "")
+# 	if not "Quest Domain" in heading and not "Event Domain" in heading:
+# 		for row in table.findAll("tr")[1:]:
+# 			outputline = [heading]
+# 			for link in row.findAll("a"):
+# 				if len(link.text):
+# 					outputline.append(link.text)
+# 			print(outputline)
+
+exit()
+
 character_list_url = "https://genshin-impact.fandom.com/wiki/Character/List"
-target_file = datetime.datetime.now().strftime("%Y%m%d") + ".html"
+target_file = datetime.datetime.now().strftime("%Y%m%d") + "-characters.html"
 
 html = fetch(character_list_url, output_dir + target_file)
 
@@ -172,7 +278,7 @@ for icon in traveler_icons:
 			if src and icon in src:
 				icon_src = src.split("/revision")[0]
 				icon_file = icon_src.split("/")[-1:][0]
-				fetch(icon_src, output_dir + "icons/" + icon, img=True)
+				fetch(icon_src, output_dir + "icons/" + icon, write=True)
 
 star_icons = ["Icon_1_Star.png", "Icon_2_Stars.png", "Icon_3_Stars.png", "Icon_4_Stars.png", "Icon_5_Stars.png"]
 for icon in star_icons:
@@ -184,12 +290,12 @@ for icon in star_icons:
 			if src and icon in src:
 				icon_src = src.split("/revision")[0]
 				icon_file = icon_src.split("/")[-1:][0]
-				fetch(icon_src, output_dir + "icons/" + icon, img=True)
+				fetch(icon_src, output_dir + "icons/" + icon, write=True)
 
 for icon in img_data.keys():
 	if not icon in existing_icons:
 		print("Fetch: " + icon)
-		fetch(img_data[icon], output_dir + "icons/" + icon, img=True)
+		fetch(img_data[icon], output_dir + "icons/" + icon, write=True)
 
 output["characters"] = sorted(output["characters"], key=lambda x: datetime.datetime.strptime(x["releasedate"], "%B %d, %Y"))
 output["patch"] = sorted(output["patch"])

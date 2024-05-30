@@ -22,6 +22,16 @@ input[type="date"] {
 		calc(var(--pico-form-element-spacing-horizontal) * 0.75) !important;
 }
 
+#generate-team-btn {
+	width: 40%;
+	margin: 2rem 30%;
+	font-size: calc(var(--pico-font-size) * 1.5);
+}
+
+#target-selection span {
+	font-size: calc(var(--pico-font-size) * 0.6);
+}
+
 .character-card-container {
 	display: flex;
 	flex-direction: row;
@@ -75,9 +85,12 @@ input[type="date"] {
 	color: #bbb;
 	text-decoration: line-through;
 }
-.character-card-disabled {
+.character-card-disabled, .character-card-forced-disabled {
 	filter: grayscale(0.5) brightness(.75) opacity(0.75);
 	background-color: red;
+}
+.character-card-forced-disabled .character-card-profile-5, .character-card-forced-disabled .character-card-profile-4 {
+	background: linear-gradient(to top, darkred, red);
 }
 
 #team-type-selection-buttons button {
@@ -86,6 +99,10 @@ input[type="date"] {
 	justify-content: center;
 	width: 33.33%;
 }
+#team-type-selection-buttons button span {
+	font-size: calc(var(--pico-font-size));
+}
+
 #team-type-selection-info {
 	display: flex;
 	flex-direction: column;

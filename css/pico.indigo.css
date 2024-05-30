@@ -9,7 +9,8 @@
  */
 @font-face {
 	font-family: "Genshin";
-	src: url("../assets/genshin_font.woff2") format("woff2");
+	/* src: url("../assets/genshin_font.woff2") format("woff2"); */
+	src: url("../assets/Genshin.woff") format("woff");
 }
 
 :root {

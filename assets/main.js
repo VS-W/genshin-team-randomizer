@@ -10,20 +10,62 @@ getData().then((res) => {
 	runFilters(true);
 });
 
-fitty("#team-type-selection-buttons button span", {
-	minSize: 14,
-	maxSize: 22,
-	multiLine: true
-});
-
 toggleTeamTypeButtons();
 toggleEnableCheckboxes();
 toggleBetweenRadios();
-
+teamNumberBasedSettings(initialize = true);
 gatherSettings();
+
+function setSelectedTraveler(traveler) {
+	// console.log(traveler);
+	Object.keys(gameData["processedCharacters"]).forEach(char => {
+		if (gameData["processedCharacters"][char].name.includes("Traveler")) {
+			if (!settings["traveler"].includes("Both")) {
+				if (!gameData["processedCharacters"][char].name.includes(traveler)) {
+					// gameData["processedCharacters"][char].disabled = true;
+					gameData["processedCharacters"][char].forcedDisabled = true;
+					// gameData["processedCharacters"][char].htmlElement.classList.add("character-card-disabled");
+					gameData["processedCharacters"][char].htmlElement.classList.add("character-card-forced-disabled");
+				} else {
+					// gameData["processedCharacters"][char].disabled = false;
+					gameData["processedCharacters"][char].forcedDisabled = false;
+					// gameData["processedCharacters"][char].htmlElement.classList.remove("character-card-disabled");
+					gameData["processedCharacters"][char].htmlElement.classList.remove("character-card-forced-disabled");
+				}
+			} else {
+				// gameData["processedCharacters"][char].disabled = false;
+				gameData["processedCharacters"][char].forcedDisabled = false;
+				// gameData["processedCharacters"][char].htmlElement.classList.remove("character-card-disabled");
+				gameData["processedCharacters"][char].htmlElement.classList.remove("character-card-forced-disabled");
+			}
+		}
+	});
+}
+
+function teamNumberBasedSettings(initialize = false) {
+	const targetElement = document.querySelector("input[name='number-of-teams']");
+	if (initialize) {
+		targetElement.addEventListener("change", () => {
+			teamNumberBasedSettings();
+		});
+	}
+	
+	settings["number-of-teams"] = targetElement.value;
+
+	if (settings["number-of-teams"] > 1) {
+		document.querySelector("input[name='target-multiteam']").parentElement.setAttribute("aria-disabled", "false");
+		document.querySelector("input[name='traveler-multielement']").parentElement.setAttribute("aria-disabled", "false");
+	} else {
+		targetElement.value = "1";
+		settings["number-of-teams"] = 1;
+		document.querySelector("input[name='target-multiteam']").parentElement.setAttribute("aria-disabled", "true");
+		document.querySelector("input[name='traveler-multielement']").parentElement.setAttribute("aria-disabled", "true");
+	}
+}
 
 function runFilters(initialize = false) {
 	gatherSettings();
+	setSelectedTraveler(settings["traveler"]);
 
 	const batchFilters = {
 		"element-filter": [],
@@ -106,8 +148,8 @@ function runFilters(initialize = false) {
 		charKeys.forEach(char => {
 			if (chars[char]) {
 				let charData = filterString + "-" + gameData["processedCharacters"][char][filterString].toLowerCase().replace(" ", "-");
-				if (gameData["processedCharacters"][char].name.includes("Traveler") && filterString == "region") {
-					if (!settings["traveler-region"]) {
+				if (gameData["processedCharacters"][char].name.includes("Traveler")) {
+					if (filterString == "region" && !settings["traveler-region"]) {
 						charData = "region-none";
 					}
 				}
@@ -183,7 +225,7 @@ function runFilters(initialize = false) {
 			gameData["processedCharacters"][char].htmlTitleElement.classList.remove("character-card-title-filtered");
 			gameData["processedCharacters"][char].htmlElement.classList.remove("character-card-filtered");
 
-			if (gameData["processedCharacters"][char].disabled) {
+			if (gameData["processedCharacters"][char].disabled || gameData["processedCharacters"][char].forcedDisabled) {
 				chars[char] = false;
 				disabledButNotFiltered.push(char);
 			} else {
@@ -192,7 +234,7 @@ function runFilters(initialize = false) {
 		} else {
 			gameData["processedCharacters"][char].htmlTitleElement.classList.add("character-card-title-filtered");
 			gameData["processedCharacters"][char].htmlElement.classList.add("character-card-filtered");
-			if (!gameData["processedCharacters"][char].disabled) {
+			if (!gameData["processedCharacters"][char].disabled && !gameData["processedCharacters"][char].forcedDisabled) {
 				filteredSort.push(char);
 			} else {
 				disabledSort.push(char);
@@ -203,6 +245,10 @@ function runFilters(initialize = false) {
 	(validSort.concat(disabledButNotFiltered, disabledSort, filteredSort)).forEach(char => {
 		gameData["processedCharacters"][char].htmlElement.parentElement.appendChild(gameData["processedCharacters"][char].htmlElement);
 	});
+
+	// console.log(chars);
+
+	return chars;
 }
 
 function gatherSettings() {
@@ -278,11 +324,13 @@ function toggleTeamTypeButtons() {
 function addPatchesToSelect(patches) {
 	let patchOptionElementsTemplate = ``;
 	patches.forEach(patch => {
-		patchOptionElementsTemplate += `<option ${patchOptionElementsTemplate.length ? "" : "selected "}value="${patch}">${patch}</option>`;
+		patchOptionElementsTemplate += `<option value="${patch}">${patch}</option>`;
 	});
 	document.querySelectorAll(".patch-select").forEach(selectElement => {
 		selectElement.insertAdjacentHTML('beforeend', patchOptionElementsTemplate);
 	});
+	document.querySelector("#patch-select-1").querySelectorAll("option")[0].selected = true;
+	document.querySelector("#patch-select-2").querySelectorAll("option")[patches.length - 1].selected = true;
 }
 
 function setStartDate(characters) {
