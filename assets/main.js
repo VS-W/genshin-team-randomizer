@@ -16,26 +16,80 @@ toggleBetweenRadios();
 teamNumberBasedSettings(initialize = true);
 gatherSettings();
 
+document.querySelector("#generate-team-btn").addEventListener("click", () => {
+	generateTeam();
+});
+
+function generateTeam() {
+	const chars = runFilters();
+	const totalValidChars = (settings["team-type"] == "coop") ? settings["number-of-teams"] * 4 : Object.keys(chars).filter(char => {
+		if (chars[char]) {
+			return char;
+		}
+	}).length;
+
+	const teams = [];
+	let currentTeamCount = 0, currentTeamHasTraveler = false, currentTeam = [];
+	for (let i = 0; i < totalValidChars; i++) {
+		let remainingChars = Object.keys(chars).filter(char => {
+			if (chars[char]) {
+				if (settings["team-type"] == "coop") {
+					return char;
+				}
+				if (!(currentTeamHasTraveler && gameData["processedCharacters"][char].name.includes("Traveler"))) {
+					return char;
+				}
+			}
+		});
+
+		const chosenChar = remainingChars[Math.floor(Math.random() * remainingChars.length)];
+		if (chosenChar) {
+			currentTeam.push(chosenChar);
+			
+			if (!(settings["team-type"] == "coop")) {
+				chars[chosenChar] = false;
+			}
+			if (gameData["processedCharacters"][chosenChar].name.includes("Traveler")) {
+				currentTeamHasTraveler = true;
+			}
+
+			currentTeamCount += 1;
+			if (currentTeamCount == 4) {
+				console.log(currentTeam);
+				teams.push(currentTeam);
+				currentTeam = [];
+				currentTeamCount = 0;
+				currentTeamHasTraveler = false;
+			}
+		}
+	}
+	
+	if (currentTeam.length > 0) {
+		console.log(currentTeam);
+		teams.push(currentTeam);
+	}
+
+	let index = 0, total = 0;
+	teams.forEach(team => {
+		total += team.length;
+		index += 1;
+		console.log(index, total, team);
+	});
+}
+
 function setSelectedTraveler(traveler) {
-	// console.log(traveler);
 	Object.keys(gameData["processedCharacters"]).forEach(char => {
 		if (gameData["processedCharacters"][char].name.includes("Traveler")) {
 			if (!settings["traveler"].includes("Both")) {
 				if (!gameData["processedCharacters"][char].name.includes(traveler)) {
-					// gameData["processedCharacters"][char].disabled = true;
 					gameData["processedCharacters"][char].forcedDisabled = true;
-					// gameData["processedCharacters"][char].htmlElement.classList.add("character-card-disabled");
 					gameData["processedCharacters"][char].htmlElement.classList.add("character-card-forced-disabled");
 				} else {
-					// gameData["processedCharacters"][char].disabled = false;
 					gameData["processedCharacters"][char].forcedDisabled = false;
-					// gameData["processedCharacters"][char].htmlElement.classList.remove("character-card-disabled");
 					gameData["processedCharacters"][char].htmlElement.classList.remove("character-card-forced-disabled");
 				}
 			} else {
-				// gameData["processedCharacters"][char].disabled = false;
 				gameData["processedCharacters"][char].forcedDisabled = false;
-				// gameData["processedCharacters"][char].htmlElement.classList.remove("character-card-disabled");
 				gameData["processedCharacters"][char].htmlElement.classList.remove("character-card-forced-disabled");
 			}
 		}

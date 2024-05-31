@@ -6,8 +6,11 @@ import requests
 def fetch(url, target, write=False):
 	if os.path.exists(target):
 		print("Target exists, skipping download...")
-		with open(target, "r", encoding="utf-8") as f:
-			return f.read()
+		try:
+			with open(target, "r", encoding="utf-8") as f:
+				return f.read()
+		except:
+			return
 
 	response = requests.get(url, headers={
 		"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
@@ -27,6 +30,17 @@ def fetch(url, target, write=False):
 		print(f"Download failed.")
 		return False
 
+# At the time of writing, region "Natlan" has no characters, and the "Short Male" mode type doesn't exist as playable character.
+# Adding them by default for posterity.
+output = {
+	"characters": [],
+	"region": ["Natlan"],
+	"element": [],
+	"weapon": [],
+	"model": ["Short Male"],
+	"patch": []
+}
+
 output_dir = "assets/"
 existing_icons = []
 if os.path.exists(output_dir + "icons"):
@@ -34,21 +48,31 @@ if os.path.exists(output_dir + "icons"):
 else:
     os.makedirs(output_dir + "icons")
 
-# domain_list_url = "https://genshin-impact.fandom.com/wiki/Domain/List"
-# target_file = datetime.datetime.now().strftime("%Y%m%d") + "-domain.html"
+domains = {}
 
-# html = fetch(domain_list_url, output_dir + target_file, write=True)
-# tables = bs(html, features="html.parser").findAll(class_="article-table")
-# headings = bs(html, features="html.parser").findAll("h2")[1:]
-# for table, heading in zip(tables, headings):
-# 	heading = heading.text.replace("[", "").replace("]", "")
-# 	if not "Quest Domain" in heading and not "Event Domain" in heading and not "Trouce Domain" in heading:
-# 		for row in table.findAll("tr")[1:]:
-# 			outputline = [heading]
-# 			for link in row.findAll("a"):
-# 				if len(link.text):
-# 					outputline.append(link.text)
-# 			print(outputline)
+domain_list_url = "https://genshin-impact.fandom.com/wiki/Domain/List"
+target_file = datetime.datetime.now().strftime("%Y%m%d") + "-domain.html"
+
+html = fetch(domain_list_url, output_dir + target_file, write=True)
+tables = bs(html, features="html.parser").findAll(class_="article-table")
+headings = bs(html, features="html.parser").findAll("h2")[1:]
+for table, heading in zip(tables, headings):
+	heading = heading.text.replace("[", "").replace("]", "")
+	if not "Quest Domain" in heading and not "Event Domain" in heading and not "Trounce Domain" in heading:
+		for row in table.findAll("tr")[1:]:
+			outputline = [heading]
+			for link in row.findAll("a"):
+				if len(link.text) and link.text != "World Level":
+					outputline.append(link.text)
+			if not outputline[0] in domains:
+				domains[outputline[0]] = {}
+			domains[outputline[0]][outputline[1]] = {}
+			domains[outputline[0]][outputline[1]]["name"] = outputline[1]
+			domains[outputline[0]][outputline[1]]["location"] = outputline[2:-1]
+			domains[outputline[0]][outputline[1]]["region"] = outputline[-1]
+			# print(outputline[0], domains[outputline[0]])
+
+output["domains"] = domains
 
 # Manually mapped existing bosses with their full art / subtitles.
 # Don't want to pull a whole extra page for each boss unnecessarily.
@@ -116,28 +140,43 @@ for row in table.findAll("tr")[1:]:
 				"fullart": "",
 				"subtitle": ""
 			}
-			print("added:", outputline[0])
+			# print("added:", outputline[0])
+		weekly_bosses[outputline[0]]["name"] = outputline[0]
 		weekly_bosses[outputline[0]]["location"] = outputline[1]
 		weekly_bosses[outputline[0]]["region"] = outputline[2]
-		print(outputline[0], weekly_bosses[outputline[0]])
+		# print(outputline[0], weekly_bosses[outputline[0]])
 
-# overworld_boss_list_url = "https://genshin-impact.fandom.com/wiki/Normal_Boss"
-# target_file = datetime.datetime.now().strftime("%Y%m%d") + "-normal.html"
+output["weekly_bosses"] = weekly_bosses
 
-# html = fetch(overworld_boss_list_url, output_dir + target_file, write=True)
-# tables = bs(html, features="html.parser").findAll(class_="article-table")
-# headings = bs(html, features="html.parser").findAll("h2")[1:]
-# for table, heading in zip(tables, headings):
-# 	heading = heading.text.replace("[", "").replace("]", "")
-# 	if not "Quest Domain" in heading and not "Event Domain" in heading:
-# 		for row in table.findAll("tr")[1:]:
-# 			outputline = [heading]
-# 			for link in row.findAll("a"):
-# 				if len(link.text):
-# 					outputline.append(link.text)
-# 			print(outputline)
+overworld_bosses = {}
 
-exit()
+overworld_boss_list_url = "https://genshin-impact.fandom.com/wiki/Normal_Boss"
+target_file = datetime.datetime.now().strftime("%Y%m%d") + "-overworld.html"
+
+html = fetch(overworld_boss_list_url, output_dir + target_file, write=True)
+tables = bs(html, features="html.parser").findAll(class_="wikitable")
+for table in tables:
+	for row in table.findAll("tr"):
+		outputline = []
+		for link in row.findAll("a"):
+			if len(link.text):
+				outputline.append(link.text.replace("\"", ""))
+		if len(outputline) > 1:
+			overworld_bosses[outputline[0]] = {}
+			overworld_bosses[outputline[0]]["name"] = outputline[0]
+			overworld_bosses[outputline[0]]["location"] = outputline[1:-1][0]
+			overworld_bosses[outputline[0]]["region"] = outputline[-1]
+			overworld_bosses[outputline[0]]["icon"] = ""
+			src = row.find("img").get("data-src") or row.find("img").get("src")
+			# print(outputline[0])
+			if src:
+				icon_src = src.split("/revision")[0]
+				icon_file = icon_src.split("/")[-1:][0]
+				fetch(icon_src, output_dir + "icons/" + icon_file, write=True)
+				overworld_bosses[outputline[0]]["icon"] = icon_file
+			# print(outputline[0], overworld_bosses[outputline[0]])
+
+output["overworld_bosses"] = overworld_bosses
 
 character_list_url = "https://genshin-impact.fandom.com/wiki/Character/List"
 target_file = datetime.datetime.now().strftime("%Y%m%d") + "-characters.html"
@@ -189,18 +228,6 @@ for row in article_table.find_all("tr"):
 		character_data.append(data)
 
 mapping = ["icon", "name", "rarity", "element", "weapon", "region", "model", "releasedate", "patch"]
-
-# At the time of writing, region "Natlan" has no characters, and the "Short Male" mode type doesn't exist as playable character.
-# Adding them by default for posterity.
-output = {
-	"characters": [],
-	"region": ["Natlan"],
-	"element": [],
-	"weapon": [],
-	"model": ["Short Male"],
-	"patch": []
-}
-
 for char in character_data:
 	mapped = dict(zip(mapping, char))
 	if not mapped["name"] == "Traveler":
@@ -303,4 +330,4 @@ output["patch"] = sorted(output["patch"])
 with open(output_dir + "data.json", "w", encoding="utf-8") as f:
 	f.write(json.dumps(output, indent=4))
 
-# print(json.dumps(output, indent=4))
+print(json.dumps(output, indent=4))
