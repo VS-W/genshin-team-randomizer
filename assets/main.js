@@ -13,6 +13,7 @@ getData().then((res) => {
 toggleTeamTypeButtons();
 toggleEnableCheckboxes();
 toggleBetweenRadios();
+// randomizedWeaponToggle();
 teamNumberBasedSettings(initialize = true);
 gatherSettings();
 
@@ -29,10 +30,16 @@ function generateTeam() {
 	}).length;
 
 	const teams = [];
-	let currentTeamCount = 0, currentTeamHasTraveler = false, currentTeam = [];
+	let currentTeamCount = 0, currentTeamHasTraveler = false, currentTeam = [], currentGenerationHasTraveler = false;
 	for (let i = 0; i < totalValidChars; i++) {
 		let remainingChars = Object.keys(chars).filter(char => {
 			if (chars[char]) {
+				if (settings["traveler-multielement"]
+					&& gameData["processedCharacters"][char].name.includes("Traveler")
+					&& currentGenerationHasTraveler) {
+
+					return;
+				}
 				if (settings["team-type"] == "coop") {
 					return char;
 				}
@@ -51,11 +58,12 @@ function generateTeam() {
 			}
 			if (gameData["processedCharacters"][chosenChar].name.includes("Traveler")) {
 				currentTeamHasTraveler = true;
+				currentGenerationHasTraveler = true;
 			}
 
 			currentTeamCount += 1;
 			if (currentTeamCount == 4) {
-				console.log(currentTeam);
+				// console.log(currentTeam);
 				teams.push(currentTeam);
 				currentTeam = [];
 				currentTeamCount = 0;
@@ -65,16 +73,161 @@ function generateTeam() {
 	}
 	
 	if (currentTeam.length > 0) {
-		console.log(currentTeam);
+		// console.log(currentTeam);
 		teams.push(currentTeam);
 	}
 
-	let index = 0, total = 0;
+	const container = document.querySelector("#generated-card-container");
+	container.replaceChildren();
+	let teamIndex = 0, total = 0;
 	teams.forEach(team => {
 		total += team.length;
-		index += 1;
-		console.log(index, total, team);
+		teamIndex += 1;
+		if (teamIndex > ((settings["team-type"] == "abyss") ? (settings["number-of-teams"] * 2) : settings["number-of-teams"])) {
+			return;
+		}
+		console.log(teamIndex, total, team);
+		const teamContainer = document.createElement("div");
+		teamContainer.classList.add("generated-team-container");
+		let lastID = 0;
+		for (let i = 0; i < team.length; i++) {
+			makeGeneratedCard(gameData["processedCharacters"][team[i]], teamContainer, `${teamIndex}-${i}`);
+			lastID = i + 1;
+		}
+		if (team.length > 0 && team.length < 4) {
+			for (let i = 0; i < (4 - team.length); i++) {
+				let blankChar = {
+					"icon": "Background_Item_1_Star.png",
+					"name": "---",
+					"rarity": "5",
+					"element": "Blank",
+					"weapon": "Blank"
+				};
+				makeGeneratedCard(blankChar, teamContainer, `${teamIndex}-${i + lastID}`);
+			}
+		}
+
+		container.appendChild(teamContainer);
+
+		let delay = 0;
+		container.querySelectorAll(".character-card").forEach(card => {
+			console.log(delay)
+			setTimeout(() => {
+				card.classList.remove("opacity-zero");
+				card.classList.add("rotate3d-appear");
+			}, delay);
+			delay += 100;
+			if (delay > 300) {
+				delay = 0;
+			}
+		});
+
+		if (!(settings["random-weapon-type"] == "disabled")) {
+			makeTeamWeaponInfobox(container);
+		}
+
+		if (!(settings["team-type"] == "abyss") || (settings["team-type"] == "abyss" && teamIndex % 2 == 0)) {
+			makeTeamInfobox(container);
+
+			container.appendChild(document.createElement("hr"));
+		}
 	});
+
+	fitty(".generated-character-card-title-text", {
+		minSize: 10,
+		maxSize: 16,
+		multiLine: true
+	});
+}
+
+function getRandomWeaponStar() {
+	return settings["random-weapon-stars"][Math.floor(Math.random() * settings["random-weapon-stars"].length)];
+}
+
+function makeTeamWeaponInfobox(container) {
+	let rarities = [];
+	if (settings["random-weapon-type"] == "random-single") {
+		const singleRarity = getRandomWeaponStar();
+		for (let i = 0; i < 4; i++) {
+			rarities.push(singleRarity);
+		}
+	} else if (settings["random-weapon-type"] == "random-varied") {
+		for (let i = 0; i < 4; i++) {
+			rarities.push(getRandomWeaponStar());
+		}
+	}
+	console.log(rarities);
+	const template = `
+		<span>Using weapons of rarity:</span>
+		<div class="blank-card-text-container">
+			<span class="blank-card-text">${rarities[0]} <img src="assets/icons/Icon_1_Star.png"></span>
+			<span class="blank-card-text">${rarities[1]} <img src="assets/icons/Icon_1_Star.png"></span>
+			<span class="blank-card-text">${rarities[2]} <img src="assets/icons/Icon_1_Star.png"></span>
+			<span class="blank-card-text">${rarities[3]} <img src="assets/icons/Icon_1_Star.png"></span>
+		</div>
+	`;
+	const htmlElement = document.createElement("div");
+	htmlElement.innerHTML = template;
+	htmlElement.classList.add("generated-team-divider");
+	htmlElement.classList.add("random-weapon-infobox");
+
+	// if (settings["random-weapon-type"] == "disabled") {
+	// 	htmlElement.classList.add("removed");
+	// }
+
+	container.appendChild(htmlElement);
+}
+
+// function randomizedWeaponToggle() {
+// 	document.querySelectorAll("input[name='random-weapon-type']").forEach(checkbox => {
+// 		checkbox.addEventListener("change", () => {
+// 			gatherSettings();
+// 			console.log(settings["random-weapon-type"])
+// 			document.querySelectorAll(".random-weapon-infobox").forEach(infobox => {
+// 				if (settings["random-weapon-type"] == "disabled") {
+// 					infobox.classList.add("removed");
+// 				} else {
+// 					infobox.classList.remove("removed");
+// 				}
+// 			});
+// 		});
+// 	});
+// }
+
+function makeTeamInfobox(container) {
+	const template = `
+		<span>text here</span>
+	`;
+	const htmlElement = document.createElement("div");
+	htmlElement.innerHTML = template;
+	htmlElement.classList.add("generated-team-divider");
+	htmlElement.classList.add("target-infobox");
+	container.appendChild(htmlElement);
+}
+
+function makeGeneratedCard(character, container, idNum) {
+	const element = character["element"],
+		weapon = character["weapon"],
+		icon = "Background_Item_1_Star.png",
+		// icon = character["icon"],
+		name = shortNameMap(character["name"]),
+		star = character["rarity"];
+	const template = `
+		<div class="character-card-icon-container">
+			<img class="character-card-icon character-card-icon-element" src="assets/icons/${element}.png">
+			<img class="character-card-icon character-card-icon-weapon" src="assets/icons/${weapon}.png">
+		</div>
+		<img class="character-card-profile-${star}" src="assets/icons/${icon}">
+		<div class="character-card-title"><span class="character-card-title-text generated-character-card-title-text">&thinsp;${name}&thinsp;</span></div>
+	`;
+	const htmlElement = document.createElement("div");
+	htmlElement.innerHTML = template;
+	htmlElement.role = "button";
+	htmlElement.classList.add("character-card");
+	htmlElement.classList.add("opacity-zero");
+	htmlElement.id = "generated_" + idNum;
+
+	container.appendChild(htmlElement);
 }
 
 function setSelectedTraveler(traveler) {
