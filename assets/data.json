@@ -989,6 +989,28 @@
             "model": "Tall Female",
             "releasedate": "April 24, 2024",
             "patch": "4.6"
+        },
+        {
+            "icon": "Clorinde_Icon.png",
+            "name": "Clorinde",
+            "rarity": "5",
+            "element": "Electro",
+            "weapon": "Sword",
+            "region": "Fontaine",
+            "model": "Tall Female",
+            "releasedate": "June 05, 2024",
+            "patch": "4.7"
+        },
+        {
+            "icon": "Sethos_Icon.png",
+            "name": "Sethos",
+            "rarity": "4",
+            "element": "Electro",
+            "weapon": "Bow",
+            "region": "Sumeru",
+            "model": "Medium Male",
+            "releasedate": "June 05, 2024",
+            "patch": "4.7"
         }
     ],
     "region": [
@@ -1056,7 +1078,8 @@
         "4.3",
         "4.4",
         "4.5",
-        "4.6"
+        "4.6",
+        "4.7"
     ],
     "domains": {
         "Domains of Forgery": {
@@ -1452,6 +1475,9 @@
         "The Knave": {
             "fullart": "The_Knave.png",
             "subtitle": "Cinder of Two Worlds' Flames",
+            "color": [
+                "pyro"
+            ],
             "name": "The Knave",
             "location": "Mont Esus East",
             "region": "Fontaine"
@@ -1459,6 +1485,9 @@
         "All-Devouring Narwhal": {
             "fullart": "All-Devouring_Narwhal.png",
             "subtitle": "Visitor from the Far Side of the Sea of Stars",
+            "color": [
+                "hydro"
+            ],
             "name": "All-Devouring Narwhal",
             "location": "Salacia Plain",
             "region": "Fontaine"
@@ -1466,6 +1495,9 @@
         "Guardian of Apep's Oasis": {
             "fullart": "Warden_of_Oasis_Prime.png",
             "subtitle": "Evolved From an Apocalyptic Millennium",
+            "color": [
+                "dendro"
+            ],
             "name": "Guardian of Apep's Oasis",
             "location": "Desert of Hadramaveth",
             "region": "Sumeru"
@@ -1473,6 +1505,9 @@
         "Everlasting Lord of Arcane Wisdom": {
             "fullart": "Everlasting_Lord_of_Arcane_Wisdom.png",
             "subtitle": "Shouki no Kami, the Prodigal",
+            "color": [
+                "electro"
+            ],
             "name": "Everlasting Lord of Arcane Wisdom",
             "location": "Chinvat Ravine",
             "region": "Sumeru"
@@ -1480,6 +1515,9 @@
         "Magatsu Mitake Narukami no Mikoto": {
             "fullart": "Magatsu_Mitake_Narukami_no_Mikoto.png",
             "subtitle": "Raiden no Inazuma Tono",
+            "color": [
+                "electro"
+            ],
             "name": "Magatsu Mitake Narukami no Mikoto",
             "location": "Grand Narukami Shrine",
             "region": "Inazuma"
@@ -1487,6 +1525,9 @@
         "La Signora": {
             "fullart": "Signora.png",
             "subtitle": "Crimson Witch of Embers",
+            "color": [
+                "pyro"
+            ],
             "name": "La Signora",
             "location": "Tenshukaku",
             "region": "Inazuma"
@@ -1494,6 +1535,9 @@
         "Azhdaha": {
             "fullart": "Azhdaha.png",
             "subtitle": "Sealed Lord of Vishaps",
+            "color": [
+                "geo"
+            ],
             "name": "Azhdaha",
             "location": "Nantianmen",
             "region": "Liyue"
@@ -1501,6 +1545,10 @@
         "Childe": {
             "fullart": "Childe.png",
             "subtitle": "Delusion Unleashed",
+            "color": [
+                "hydro",
+                "electro"
+            ],
             "name": "Childe",
             "location": "Golden House",
             "region": "Liyue"
@@ -1508,6 +1556,9 @@
         "Stormterror Dvalin": {
             "fullart": "Dvalin.png",
             "subtitle": "Erstwhile King of the Skies",
+            "color": [
+                "anemo"
+            ],
             "name": "Stormterror Dvalin",
             "location": "Stormterror's Lair",
             "region": "Mondstadt"
@@ -1515,6 +1566,10 @@
         "Andrius": {
             "fullart": "Andrius.png",
             "subtitle": "Dominator of Wolves",
+            "color": [
+                "anemo",
+                "cryo"
+            ],
             "name": "Andrius",
             "location": "Wolvendom",
             "region": "Mondstadt"
@@ -1522,180 +1577,254 @@
     },
     "overworld_bosses": {
         "Anemo Hypostasis": {
+            "color": [
+                "anemo"
+            ],
             "name": "Anemo Hypostasis",
             "location": "Stormbearer Mountains",
             "region": "Mondstadt",
             "icon": "Anemo_Hypostasis_Icon.png"
         },
         "Electro Hypostasis": {
+            "color": [
+                "electro"
+            ],
             "name": "Electro Hypostasis",
             "location": "Cape Oath",
             "region": "Mondstadt",
             "icon": "Electro_Hypostasis_Icon.png"
         },
         "Cryo Regisvine": {
+            "color": [
+                "cryo"
+            ],
             "name": "Cryo Regisvine",
             "location": "Starfell Valley",
             "region": "Mondstadt",
             "icon": "Cryo_Regisvine_Icon.png"
         },
         "Cryo Hypostasis": {
+            "color": [
+                "cryo"
+            ],
             "name": "Cryo Hypostasis",
             "location": "Dragonspine",
             "region": "Mondstadt",
             "icon": "Cryo_Hypostasis_Icon.png"
         },
         "Geo Hypostasis": {
+            "color": [
+                "geo"
+            ],
             "name": "Geo Hypostasis",
             "location": "Guyun Stone Forest",
             "region": "Liyue",
             "icon": "Geo_Hypostasis_Icon.png"
         },
         "Pyro Regisvine": {
+            "color": [
+                "pyro"
+            ],
             "name": "Pyro Regisvine",
             "location": "Cuijue Slope",
             "region": "Liyue",
             "icon": "Pyro_Regisvine_Icon.png"
         },
         "Rhodeia of Loch": {
+            "color": [
+                "hydro"
+            ],
             "name": "Rhodeia of Loch",
             "location": "Bishui Plain",
             "region": "Liyue",
             "icon": "Oceanid_Icon.png"
         },
         "Primo Geovishap": {
+            "color": [
+                "geo"
+            ],
             "name": "Primo Geovishap",
             "location": "Tianqiu Valley",
             "region": "Liyue",
             "icon": "Primo_Geovishap_Icon.png"
         },
         "Ruin Serpent": {
+            "color": [
+                "geo"
+            ],
             "name": "Ruin Serpent",
             "location": "The Serpent's Cave",
             "region": "Liyue",
             "icon": "Ruin_Serpent_Icon.png"
         },
         "Solitary Suanni": {
+            "color": [
+                "anemo"
+            ],
             "name": "Solitary Suanni",
             "location": "Chenyu Vale: Southern Mountain",
             "region": "Liyue",
             "icon": "Solitary_Suanni_Icon.png"
         },
         "Maguu Kenki": {
+            "color": [],
             "name": "Maguu Kenki",
             "location": "Serpent's Head",
             "region": "Inazuma",
             "icon": "Maguu_Kenki_Icon.png"
         },
         "Perpetual Mechanical Array": {
+            "color": [],
             "name": "Perpetual Mechanical Array",
             "location": "Narukami Island",
             "region": "Inazuma",
             "icon": "Perpetual_Mechanical_Array_Icon.png"
         },
         "Pyro Hypostasis": {
+            "color": [
+                "pyro"
+            ],
             "name": "Pyro Hypostasis",
             "location": "Kannazuka",
             "region": "Inazuma",
             "icon": "Pyro_Hypostasis_Icon.png"
         },
         "Hydro Hypostasis": {
+            "color": [
+                "hydro"
+            ],
             "name": "Hydro Hypostasis",
             "location": "Watatsumi Island",
             "region": "Inazuma",
             "icon": "Hydro_Hypostasis_Icon.png"
         },
         "Thunder Manifestation": {
+            "color": [
+                "electro"
+            ],
             "name": "Thunder Manifestation",
             "location": "Amakumo Peak",
             "region": "Inazuma",
             "icon": "Thunder_Manifestation_Icon.png"
         },
         "Golden Wolflord": {
+            "color": [
+                "geo"
+            ],
             "name": "Golden Wolflord",
             "location": "Tsurumi Island",
             "region": "Inazuma",
             "icon": "Golden_Wolflord_Icon.png"
         },
         "Coral Defenders": {
+            "color": [],
             "name": "Coral Defenders",
             "location": "Dainichi Mikoshi",
             "region": "Inazuma",
             "icon": "Bathysmal_Vishap_Herd_Icon.png"
         },
         "Jadeplume Terrorshroom": {
+            "color": [
+                "dendro"
+            ],
             "name": "Jadeplume Terrorshroom",
             "location": "Vissudha Field",
             "region": "Sumeru",
             "icon": "Jadeplume_Terrorshroom_Icon.png"
         },
         "Electro Regisvine": {
+            "color": [
+                "electro"
+            ],
             "name": "Electro Regisvine",
             "location": "Mawtiyima Forest",
             "region": "Sumeru",
             "icon": "Electro_Regisvine_Icon.png"
         },
         "Aeonblight Drake": {
+            "color": [],
             "name": "Aeonblight Drake",
             "location": "Ardravi Valley",
             "region": "Sumeru",
             "icon": "Aeonblight_Drake_Icon.png"
         },
         "Algorithm of Semi-Intransient Matrix of Overseer Network": {
+            "color": [],
             "name": "Algorithm of Semi-Intransient Matrix of Overseer Network",
             "location": "Hypostyle Desert",
             "region": "Sumeru",
             "icon": "Algorithm_of_Semi-Intransient_Matrix_of_Overseer_Network_Icon.png"
         },
         "Dendro Hypostasis": {
+            "color": [
+                "dendro"
+            ],
             "name": "Dendro Hypostasis",
             "location": "Land of Lower Setekh",
             "region": "Sumeru",
             "icon": "Dendro_Hypostasis_Icon.png"
         },
         "Setekh Wenut": {
+            "color": [
+                "anemo"
+            ],
             "name": "Setekh Wenut",
             "location": "Wenut Tunnels",
             "region": "Sumeru",
             "icon": "Setekh_Wenut_Icon.png"
         },
         "Iniquitous Baptist": {
+            "color": [],
             "name": "Iniquitous Baptist",
             "location": "Gavireh Lajavard",
             "region": "Sumeru",
             "icon": "Iniquitous_Baptist_Icon.png"
         },
         "Icewind Suite": {
+            "color": [],
             "name": "Icewind Suite",
             "location": "Court of Fontaine Region",
             "region": "Fontaine",
             "icon": "Icewind_Suite_Icon.png"
         },
         "Emperor of Fire and Iron": {
+            "color": [
+                "pyro"
+            ],
             "name": "Emperor of Fire and Iron",
             "location": "Belleau Region",
             "region": "Fontaine",
             "icon": "Emperor_of_Fire_and_Iron_Icon.png"
         },
         "Millennial Pearl Seahorse": {
+            "color": [
+                "electro"
+            ],
             "name": "Millennial Pearl Seahorse",
             "location": "Liffey Region",
             "region": "Fontaine",
             "icon": "Millennial_Pearl_Seahorse_Icon.png"
         },
         "Prototype Cal. Breguet": {
+            "color": [],
             "name": "Prototype Cal. Breguet",
             "location": "Academic Assembly Hall",
             "region": "Fontaine",
             "icon": "Prototype_Cal._Breguet_Icon.png"
         },
         "Hydro Tulpa": {
+            "color": [
+                "hydro"
+            ],
             "name": "Hydro Tulpa",
             "location": "Beryl Region",
             "region": "Fontaine",
             "icon": "Hydro_Tulpa_Icon.png"
         },
         "Statue of Marble and Brass": {
+            "color": [
+                "geo"
+            ],
             "name": "Statue of Marble and Brass",
             "location": "Nostoi Region",
             "region": "Fontaine",

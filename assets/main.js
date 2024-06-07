@@ -21,6 +21,10 @@ document.querySelector("#generate-team-btn").addEventListener("click", () => {
 	generateTeam();
 });
 
+function randomFromArray(arr) {
+	return arr[Math.floor(Math.random() * arr.length)]
+}
+
 function generateTeam() {
 	const chars = runFilters();
 	const totalValidChars = (settings["team-type"] == "coop") ? settings["number-of-teams"] * 4 : Object.keys(chars).filter(char => {
@@ -49,7 +53,7 @@ function generateTeam() {
 			}
 		});
 
-		const chosenChar = remainingChars[Math.floor(Math.random() * remainingChars.length)];
+		const chosenChar = randomFromArray(remainingChars);
 		if (chosenChar) {
 			currentTeam.push(chosenChar);
 			
@@ -111,7 +115,7 @@ function generateTeam() {
 
 		let delay = 0;
 		container.querySelectorAll(".character-card").forEach(card => {
-			console.log(delay)
+			// console.log(delay)
 			setTimeout(() => {
 				card.classList.remove("opacity-zero");
 				card.classList.add("rotate3d-appear");
@@ -127,8 +131,12 @@ function generateTeam() {
 		}
 
 		if (!(settings["team-type"] == "abyss") || (settings["team-type"] == "abyss" && teamIndex % 2 == 0)) {
-			makeTeamInfobox(container);
-
+			// console.log()
+			let targetInfo = ``;
+			if (settings["targets"].length > 0) {
+				targetInfo = `${getRandomTarget()}`;
+			}
+			makeTeamInfobox(container, teamIndex, targetInfo);
 			container.appendChild(document.createElement("hr"));
 		}
 	});
@@ -140,20 +148,119 @@ function generateTeam() {
 	});
 }
 
-function getRandomWeaponStar() {
-	return settings["random-weapon-stars"][Math.floor(Math.random() * settings["random-weapon-stars"].length)];
+function makeDomainDisplay(type, target) {
+	const domain = gameData["domains"][type][target];
+	return `
+		<div class="domain-title">${domain["name"]}</div>
+		<div class="domain-type">${type.replace("Domains", "Domain")}</div>
+		<div class="domain-location">${domain["location"].join(", ")}</div>
+		<div class="domain-region">${domain["region"]}</div>
+	`;
+}
+
+function makeBossDisplay(type, target) {
+	const boss = gameData[type][target];
+	if (Object.keys(gameData[type][target]).includes("color")) {
+		const color1 = gameData[type][target]["color"][0];
+		const color2 = gameData[type][target]["color"][1];
+	}
+	const color1 = Object.keys(gameData[type][target]).includes("color") ? "color-" + gameData[type][target]["color"][0] : "";
+	const color2 = color1.length > 0 && gameData[type][target]["color"].length > 1 ? "color-" + gameData[type][target]["color"][1] : color1;
+	switch (type) {
+		case "overworld_bosses":
+			return `
+				<div class="boss-info-container">
+					<div class="boss-img-container">
+						<img class="boss-img" src="${"assets/icons/" + boss["icon"]}">
+					</div>
+					<div class="boss-detail-container">
+						<div class="boss-title ${color1}">${boss["name"]}</div>
+						<div class="boss-location">${boss["location"]}</div>
+						<div class="boss-region">${boss["region"]}</div>
+					</div>
+				</div>
+			`;
+		case "weekly_bosses":
+			return `
+				<div class="boss-info-container">
+					<div class="boss-img-container">
+						<img class="boss-img" src="${"assets/weeklybossfullart/" + boss["fullart"]}">
+					</div>
+					<div class="boss-detail-container">
+						<div class="boss-title ${color1}">${boss["name"]}</div>
+						<div class="boss-subtitle ${color2}">${boss["subtitle"]}</div>
+						<div class="boss-location">${boss["location"]}</div>
+						<div class="boss-region">${boss["region"]}</div>
+					</div>
+				</div>
+			`;
+	}
+}
+
+function getRandomTarget() {
+	if (settings["team-type"] == "abyss") {
+		return `
+			<div class="abyss-title">Abyss</div>
+			<div class="abyss-floor">Floor ${[9, 10, 11, 12][document.querySelectorAll(".target-infobox").length % 4]}</div>
+		`;
+	}
+	const possibleTargets = settings["targets"];
+	if (settings["team-type"] == "coop" && possibleTargets.includes("target-abyss")) {
+		if (possibleTargets.length > 1) {
+			possibleTargets.splice(possibleTargets.indexOf("target-abyss"), 1);
+		} else {
+			return ``;
+		}
+	}
+	const target = randomFromArray(possibleTargets);
+	switch (target) {
+		case "target-abyss":
+			const floors = [9, 10, 11, 12];
+			return `
+				<div class="abyss-title">Abyss</div>
+				<div class="abyss-floor">Floor ${randomFromArray(floors)} / ${randomFromArray(["First Half", "Second Half"])}</div>
+			`;
+		case "target-overworld":
+			return makeBossDisplay("overworld_bosses", randomFromArray(Object.keys(gameData["overworld_bosses"])));
+		case "target-weekly":
+			return makeBossDisplay("weekly_bosses", randomFromArray(Object.keys(gameData["weekly_bosses"])));
+		case "target-domain":
+			const randomDomainType = randomFromArray(Object.keys(gameData["domains"]).filter(key => key !== "One-Time Domains"));
+			const targetDomain = randomFromArray(Object.keys(gameData["domains"][randomDomainType]));
+			
+			return makeDomainDisplay(randomDomainType, targetDomain);
+		case "target-onetime-domain":
+			const onetimeDomainTarget = randomFromArray(Object.keys(gameData["domains"]["One-Time Domains"]));
+
+			return makeDomainDisplay("One-Time Domains", onetimeDomainTarget);
+	}
+}
+
+function makeTeamInfobox(container, teamIndex, targetInfo) {
+	// settings["targets"]
+	// settings["target-multiteam"]
+
+	const template = `
+		<span>Team #${(settings["team-type"] == "abyss") ? teamIndex / 2 : teamIndex}</span>
+	` + targetInfo;
+	const htmlElement = document.createElement("div");
+	htmlElement.innerHTML = template;
+	htmlElement.classList.add("generated-team-divider");
+	htmlElement.classList.add("target-infobox");
+
+	container.appendChild(htmlElement);
 }
 
 function makeTeamWeaponInfobox(container) {
 	let rarities = [];
 	if (settings["random-weapon-type"] == "random-single") {
-		const singleRarity = getRandomWeaponStar();
+		const singleRarity = randomFromArray(settings["random-weapon-stars"]);
 		for (let i = 0; i < 4; i++) {
 			rarities.push(singleRarity);
 		}
 	} else if (settings["random-weapon-type"] == "random-varied") {
 		for (let i = 0; i < 4; i++) {
-			rarities.push(getRandomWeaponStar());
+			rarities.push(randomFromArray(settings["random-weapon-stars"]));
 		}
 	}
 	console.log(rarities);
@@ -193,17 +300,6 @@ function makeTeamWeaponInfobox(container) {
 // 		});
 // 	});
 // }
-
-function makeTeamInfobox(container) {
-	const template = `
-		<span>text here</span>
-	`;
-	const htmlElement = document.createElement("div");
-	htmlElement.innerHTML = template;
-	htmlElement.classList.add("generated-team-divider");
-	htmlElement.classList.add("target-infobox");
-	container.appendChild(htmlElement);
-}
 
 function makeGeneratedCard(character, container, idNum) {
 	const element = character["element"],
@@ -465,9 +561,11 @@ function gatherSettings() {
 	settings["number-of-teams"] = document.querySelector("input[name='number-of-teams']").value;
 	settings["random-weapon-type"] = document.querySelector("input[name='random-weapon-type']:checked").value;
 	settings["random-weapon-stars"] = [];
-	document.querySelector("#random-weapon-stars").querySelectorAll("input[type='checkbox']:checked").forEach(el => settings["random-weapon-stars"].push(el.value));
+	document.querySelector("#random-weapon-stars").querySelectorAll("input[type='checkbox']:checked")
+		.forEach(el => settings["random-weapon-stars"].push(el.value));
 	settings["targets"] = [];
-	document.querySelector("#target-selection").querySelectorAll("input[type='checkbox']:checked").forEach(el => settings["targets"].push(el.name));
+	document.querySelector("#target-selection").querySelectorAll("input[type='checkbox']:checked")
+		.forEach(el => settings["targets"].push(el.name));
 	settings["target-multiteam"] = document.querySelector("input[name='target-multiteam']").checked;
 }
 

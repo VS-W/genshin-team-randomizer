@@ -45,11 +45,11 @@ input[type="date"] {
 	display: inline-block;
 	padding: 0;
 	width: 20%;
-	max-width: 8em;
+	max-width: 8rem;
 	border: none;
 	border-radius: 5%;
 	overflow: hidden;
-	margin: 0.1em;
+	margin: 0.1rem;
 }
 
 .character-card-profile-4 {
@@ -121,7 +121,7 @@ input[type="date"] {
 }
 
 .generated-team-container .character-card {
-	margin: 0.2em;
+	margin: 0.2rem;
 }
 
 .generated-team-divider {
@@ -143,9 +143,9 @@ input[type="date"] {
 	display: inline-block;
 	padding: 0;
 	width: 20%;
-	max-width: 8em;
+	max-width: 8rem;
 	overflow: hidden;
-	margin: 0.2em;
+	margin: 0.2rem;
 	text-align: center;
 	font-size: 1.5rem;
 }
@@ -161,6 +161,80 @@ input[type="date"] {
 
 .target-infobox {
 	margin: 2rem 0;
+}
+
+.boss-info-container {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	width: 70%;
+	margin-top: 1rem;
+	/* margin-left: 15%; */
+}
+
+.boss-detail-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 48%;
+}
+
+.boss-img-container {
+	width: 48%;
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.boss-title {
+	text-align: center;
+	font-size: calc(var(--pico-font-size) * 1.25);
+	margin-top: 0.5rem;
+}
+
+.color-anemo {
+	color: #33ccb3;
+}
+.color-geo {
+	color: #cfa726;
+}
+.color-electro {
+	color: #d376f0;
+}
+.color-dendro {
+	color: #7bb42d;
+}
+.color-hydro {
+	color: #1c72fd;
+}
+.color-pyro {
+	color: #e2311d;
+}
+.color-cryo {
+	color: #98c8e8;
+}
+
+.boss-subtitle {
+	text-align: center;
+	font-size: calc(var(--pico-font-size) * 0.75);
+	margin-top: 0.75rem;
+}
+
+.boss-location {
+	margin-top: 0.75rem;
+	text-align: center;
+	font-size: calc(var(--pico-font-size) * 1);
+}
+
+.boss-region {
+	text-align: center;
+	font-size: calc(var(--pico-font-size) * 1);
+}
+
+.boss-img {
+	width: 100%;
+	max-width: 15rem;
 }
 
 .opacity-zero {

@@ -83,43 +83,53 @@ output["domains"] = domains
 weekly_bosses = {
 	"The Knave": {
 		"fullart": "The_Knave.png",
-		"subtitle": "Cinder of Two Worlds' Flames"
+		"subtitle": "Cinder of Two Worlds' Flames",
+		"color": ["pyro"]
 	},
 	"All-Devouring Narwhal": {
 		"fullart": "All-Devouring_Narwhal.png",
-		"subtitle": "Visitor from the Far Side of the Sea of Stars"
+		"subtitle": "Visitor from the Far Side of the Sea of Stars",
+		"color": ["hydro"]
 	},
 	"Guardian of Apep's Oasis": {
 		"fullart": "Warden_of_Oasis_Prime.png",
-		"subtitle": "Evolved From an Apocalyptic Millennium"
+		"subtitle": "Evolved From an Apocalyptic Millennium",
+		"color": ["dendro"]
 	},
 	"Everlasting Lord of Arcane Wisdom": {
 		"fullart": "Everlasting_Lord_of_Arcane_Wisdom.png",
-		"subtitle": "Shouki no Kami, the Prodigal"
+		"subtitle": "Shouki no Kami, the Prodigal",
+		"color": ["electro"]
 	},
 	"Magatsu Mitake Narukami no Mikoto": {
 		"fullart": "Magatsu_Mitake_Narukami_no_Mikoto.png",
-		"subtitle": "Raiden no Inazuma Tono"
+		"subtitle": "Raiden no Inazuma Tono",
+		"color": ["electro"]
 	},
 	"La Signora": {
 		"fullart": "Signora.png",
-		"subtitle": "Crimson Witch of Embers"
+		"subtitle": "Crimson Witch of Embers",
+		"color": ["pyro"]
 	},
 	"Azhdaha": {
 		"fullart": "Azhdaha.png",
-		"subtitle": "Sealed Lord of Vishaps"
+		"subtitle": "Sealed Lord of Vishaps",
+		"color": ["geo"]
 	},
 	"Childe": {
 		"fullart": "Childe.png",
-		"subtitle": "Delusion Unleashed"
+		"subtitle": "Delusion Unleashed",
+		"color": ["hydro", "electro"]
 	},
 	"Stormterror Dvalin": {
 		"fullart": "Dvalin.png",
-		"subtitle": "Erstwhile King of the Skies"
+		"subtitle": "Erstwhile King of the Skies",
+		"color": ["anemo"]
 	},
 	"Andrius": {
 		"fullart": "Andrius.png",
-		"subtitle": "Dominator of Wolves"
+		"subtitle": "Dominator of Wolves",
+		"color": ["anemo", "cryo"]
 	}
 }
 
@@ -148,7 +158,99 @@ for row in table.findAll("tr")[1:]:
 
 output["weekly_bosses"] = weekly_bosses
 
-overworld_bosses = {}
+
+overworld_bosses = {
+	"Anemo Hypostasis": {
+		"color": ["anemo"]
+	},
+	"Electro Hypostasis": {
+		"color": ["electro"]
+	},
+	"Cryo Regisvine": {
+		"color": ["cryo"]
+	},
+	"Cryo Hypostasis": {
+		"color": ["cryo"]
+	},
+	"Geo Hypostasis": {
+		"color": ["geo"]
+	},
+	"Pyro Regisvine": {
+		"color": ["pyro"]
+	},
+	"Rhodeia of Loch": {
+		"color": ["hydro"]
+	},
+	"Primo Geovishap": {
+		"color": ["geo"]
+	},
+	"Ruin Serpent": {
+		"color": ["geo"]
+	},
+	"Solitary Suanni": {
+		"color": ["anemo"]
+	},
+	"Maguu Kenki": {
+		"color": []
+	},
+	"Perpetual Mechanical Array": {
+		"color": []
+	},
+	"Pyro Hypostasis": {
+		"color": ["pyro"]
+	},
+	"Hydro Hypostasis": {
+		"color": ["hydro"]
+	},
+	"Thunder Manifestation": {
+		"color": ["electro"]
+	},
+	"Golden Wolflord": {
+		"color": ["geo"]
+	},
+	"Coral Defenders": {
+		"color": []
+	},
+	"Jadeplume Terrorshroom": {
+		"color": ["dendro"]
+	},
+	"Electro Regisvine": {
+		"color": ["electro"]
+	},
+	"Aeonblight Drake": {
+		"color": []
+	},
+	"Algorithm of Semi-Intransient Matrix of Overseer Network": {
+		"color": []
+	},
+	"Dendro Hypostasis": {
+		"color": ["dendro"]
+	},
+	"Setekh Wenut": {
+		"color": ["anemo"]
+	},
+	"Iniquitous Baptist": {
+		"color": []
+	},
+	"Icewind Suite": {
+		"color": []
+	},
+	"Emperor of Fire and Iron": {
+		"color": ["pyro"]
+	},
+	"Millennial Pearl Seahorse": {
+		"color": ["electro"]
+	},
+	"Prototype Cal. Breguet": {
+		"color": []
+	},
+	"Hydro Tulpa": {
+		"color": ["hydro"]
+	},
+	"Statue of Marble and Brass": {
+		"color": ["geo"]
+	}
+}
 
 overworld_boss_list_url = "https://genshin-impact.fandom.com/wiki/Normal_Boss"
 target_file = datetime.datetime.now().strftime("%Y%m%d") + "-overworld.html"
@@ -162,7 +264,9 @@ for table in tables:
 			if len(link.text):
 				outputline.append(link.text.replace("\"", ""))
 		if len(outputline) > 1:
-			overworld_bosses[outputline[0]] = {}
+			if not outputline[0] in overworld_bosses:
+				overworld_bosses[outputline[0]] = {}
+			# overworld_bosses[outputline[0]] = {}
 			overworld_bosses[outputline[0]]["name"] = outputline[0]
 			overworld_bosses[outputline[0]]["location"] = outputline[1:-1][0]
 			overworld_bosses[outputline[0]]["region"] = outputline[-1]
