@@ -53,7 +53,7 @@ domains = {}
 domain_list_url = "https://genshin-impact.fandom.com/wiki/Domain/List"
 target_file = datetime.datetime.now().strftime("%Y%m%d") + "-domain.html"
 
-html = fetch(domain_list_url, output_dir + target_file, write=True)
+html = fetch(domain_list_url, output_dir + target_file, write=False)
 tables = bs(html, features="html.parser").findAll(class_="article-table")
 headings = bs(html, features="html.parser").findAll("h2")[1:]
 for table, heading in zip(tables, headings):
@@ -136,7 +136,7 @@ weekly_bosses = {
 weekly_boss_list_url = "https://genshin-impact.fandom.com/wiki/Weekly_Boss"
 target_file = datetime.datetime.now().strftime("%Y%m%d") + "-weekly.html"
 
-html = fetch(weekly_boss_list_url, output_dir + target_file, write=True)
+html = fetch(weekly_boss_list_url, output_dir + target_file, write=False)
 table = bs(html, features="html.parser").findAll(class_="wikitable")[1]
 for row in table.findAll("tr")[1:]:
 	outputline = []
@@ -255,7 +255,7 @@ overworld_bosses = {
 overworld_boss_list_url = "https://genshin-impact.fandom.com/wiki/Normal_Boss"
 target_file = datetime.datetime.now().strftime("%Y%m%d") + "-overworld.html"
 
-html = fetch(overworld_boss_list_url, output_dir + target_file, write=True)
+html = fetch(overworld_boss_list_url, output_dir + target_file, write=False)
 tables = bs(html, features="html.parser").findAll(class_="wikitable")
 for table in tables:
 	for row in table.findAll("tr"):
