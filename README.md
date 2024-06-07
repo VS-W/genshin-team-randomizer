@@ -1,4 +1,4 @@
-# Genshin Impact Team Randomizer
+# [Genshin Impact Team Randomizer](https://genshin-randomizer.pana.moe/)
 Yet another randomizer for Genshin Impact teams. Create multiple teams without repeated characters with a host of available filters/restrictions, generate a target (boss, domain, etc.) for each team, create co-op overworld teams (i.e. with duplicate characters on a single team), and restrict what weapons you're allowed to use. 
 
 ### Usage:
@@ -141,4 +141,4 @@ One of:
 
 	+ Calendar for date input (2 for "between" date range).
 
-###### Character data/font/images belong to Hoyoverse, mostly extracted from the [character list on the unofficial wiki](https://genshin-impact.fandom.com/wiki/Character/List) since they have a neat table already. [Fitty](https://github.com/rikschennink/fitty) used for resizing text in the character cards. [pico](https://github.com/picocss/pico) used for styling components.
+###### Character data/font/images belong to Hoyoverse, mostly extracted from the [character list on the unofficial wiki](https://genshin-impact.fandom.com/wiki/Character/List) since they have a neat table already. [Fitty](https://github.com/rikschennink/fitty) used for resizing text in the character cards. [Pico](https://github.com/picocss/pico) used for styling components.
