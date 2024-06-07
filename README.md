@@ -1,5 +1,5 @@
 # [Genshin Impact Team Randomizer](https://genshin-randomizer.pana.moe/)
-Yet another randomizer for Genshin Impact teams. Create multiple teams without repeated characters with a host of available filters/restrictions, generate a target (boss, domain, etc.) for each team, create co-op overworld teams (i.e. with duplicate characters on a single team), and restrict what weapons you're allowed to use. 
+Yet another randomizer for Genshin Impact teams. Create multiple teams without repeat characters with a host of available filters/restrictions, generate a target (boss, domain, etc.) for each team, create co-op overworld teams (i.e. with duplicate characters on a single team), and restrict what weapons you're allowed to use. 
 
 ### Usage:
 Uncheck any characters you don't have or specifically don't want to include in the pool of possible characters.
