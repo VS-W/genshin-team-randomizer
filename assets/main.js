@@ -13,7 +13,6 @@ getData().then((res) => {
 toggleTeamTypeButtons();
 toggleEnableCheckboxes();
 toggleBetweenRadios();
-// randomizedWeaponToggle();
 teamNumberBasedSettings(initialize = true);
 gatherSettings();
 
@@ -67,7 +66,6 @@ function generateTeam() {
 
 			currentTeamCount += 1;
 			if (currentTeamCount == 4) {
-				// console.log(currentTeam);
 				teams.push(currentTeam);
 				currentTeam = [];
 				currentTeamCount = 0;
@@ -77,12 +75,17 @@ function generateTeam() {
 	}
 	
 	if (currentTeam.length > 0) {
-		// console.log(currentTeam);
 		teams.push(currentTeam);
 	}
 
 	const container = document.querySelector("#generated-card-container");
 	container.replaceChildren();
+
+	let targetInfo = ``;
+	if (settings["targets"].length > 0) {
+		targetInfo = `${getRandomTarget()}`;
+	}
+
 	let teamIndex = 0, total = 0;
 	teams.forEach(team => {
 		total += team.length;
@@ -90,7 +93,6 @@ function generateTeam() {
 		if (teamIndex > ((settings["team-type"] == "abyss") ? (settings["number-of-teams"] * 2) : settings["number-of-teams"])) {
 			return;
 		}
-		console.log(teamIndex, total, team);
 		const teamContainer = document.createElement("div");
 		teamContainer.classList.add("generated-team-container");
 		let lastID = 0;
@@ -113,32 +115,25 @@ function generateTeam() {
 
 		container.appendChild(teamContainer);
 
-		let delay = 0;
-		container.querySelectorAll(".character-card").forEach(card => {
-			// console.log(delay)
-			setTimeout(() => {
-				card.classList.remove("opacity-zero");
-				card.classList.add("rotate3d-appear");
-			}, delay);
-			delay += 100;
-			if (delay > 300) {
-				delay = 0;
-			}
-		});
-
 		if (!(settings["random-weapon-type"] == "disabled")) {
 			makeTeamWeaponInfobox(container);
 		}
 
 		if (!(settings["team-type"] == "abyss") || (settings["team-type"] == "abyss" && teamIndex % 2 == 0)) {
-			// console.log()
-			let targetInfo = ``;
-			if (settings["targets"].length > 0) {
-				targetInfo = `${getRandomTarget()}`;
-			}
 			makeTeamInfobox(container, teamIndex, targetInfo);
 			container.appendChild(document.createElement("hr"));
 		}
+		
+		if (settings["target-multiteam"] && settings["targets"].length > 0) {
+			targetInfo = `${getRandomTarget()}`;
+		}
+
+		container.querySelectorAll(".character-card").forEach(card => {
+			setTimeout(() => {
+				card.classList.remove("opacity-zero");
+				card.classList.add("rotate3d-appear");
+			}, 100);
+		});
 	});
 
 	fitty(".generated-character-card-title-text", {
@@ -151,8 +146,8 @@ function generateTeam() {
 function makeDomainDisplay(type, target) {
 	const domain = gameData["domains"][type][target];
 	return `
-		<div class="domain-title">${domain["name"]}</div>
 		<div class="domain-type">${type.replace("Domains", "Domain")}</div>
+		<div class="domain-title">${domain["name"]}</div>
 		<div class="domain-location">${domain["location"].join(", ")}</div>
 		<div class="domain-region">${domain["region"]}</div>
 	`;
@@ -160,10 +155,6 @@ function makeDomainDisplay(type, target) {
 
 function makeBossDisplay(type, target) {
 	const boss = gameData[type][target];
-	if (Object.keys(gameData[type][target]).includes("color")) {
-		const color1 = gameData[type][target]["color"][0];
-		const color2 = gameData[type][target]["color"][1];
-	}
 	const color1 = Object.keys(gameData[type][target]).includes("color") ? "color-" + gameData[type][target]["color"][0] : "";
 	const color2 = color1.length > 0 && gameData[type][target]["color"].length > 1 ? "color-" + gameData[type][target]["color"][1] : color1;
 	switch (type) {
@@ -237,11 +228,11 @@ function getRandomTarget() {
 }
 
 function makeTeamInfobox(container, teamIndex, targetInfo) {
-	// settings["targets"]
-	// settings["target-multiteam"]
-
 	const template = `
-		<span>Team #${(settings["team-type"] == "abyss") ? teamIndex / 2 : teamIndex}</span>
+		<span>
+			Team #${(settings["team-type"] == "abyss") ? teamIndex / 2 : teamIndex}
+			${targetInfo.length > 0 ? " - Target:" : ""}
+		</span>
 	` + targetInfo;
 	const htmlElement = document.createElement("div");
 	htmlElement.innerHTML = template;
@@ -263,7 +254,6 @@ function makeTeamWeaponInfobox(container) {
 			rarities.push(randomFromArray(settings["random-weapon-stars"]));
 		}
 	}
-	console.log(rarities);
 	const template = `
 		<span>Using weapons of rarity:</span>
 		<div class="blank-card-text-container">
@@ -278,34 +268,14 @@ function makeTeamWeaponInfobox(container) {
 	htmlElement.classList.add("generated-team-divider");
 	htmlElement.classList.add("random-weapon-infobox");
 
-	// if (settings["random-weapon-type"] == "disabled") {
-	// 	htmlElement.classList.add("removed");
-	// }
-
 	container.appendChild(htmlElement);
 }
-
-// function randomizedWeaponToggle() {
-// 	document.querySelectorAll("input[name='random-weapon-type']").forEach(checkbox => {
-// 		checkbox.addEventListener("change", () => {
-// 			gatherSettings();
-// 			console.log(settings["random-weapon-type"])
-// 			document.querySelectorAll(".random-weapon-infobox").forEach(infobox => {
-// 				if (settings["random-weapon-type"] == "disabled") {
-// 					infobox.classList.add("removed");
-// 				} else {
-// 					infobox.classList.remove("removed");
-// 				}
-// 			});
-// 		});
-// 	});
-// }
 
 function makeGeneratedCard(character, container, idNum) {
 	const element = character["element"],
 		weapon = character["weapon"],
-		icon = "Background_Item_1_Star.png",
-		// icon = character["icon"],
+		// icon = "Background_Item_1_Star.png",
+		icon = character["icon"],
 		name = shortNameMap(character["name"]),
 		star = character["rarity"];
 	const template = `
@@ -491,7 +461,6 @@ function runFilters(initialize = false) {
 					chars[char] = false;
 				}
 			}
-			// console.log(gameData["processedCharacters"][char].name, patch, patchRange, patchTargets, chars[char]);
 		}
 	});
 
@@ -518,7 +487,6 @@ function runFilters(initialize = false) {
 					chars[char] = false;
 				}
 			}
-			// console.log(gameData["processedCharacters"][char].name, date, dateRange, dateTargets, chars[char]);
 		}
 	});
 
@@ -548,8 +516,6 @@ function runFilters(initialize = false) {
 	(validSort.concat(disabledButNotFiltered, disabledSort, filteredSort)).forEach(char => {
 		gameData["processedCharacters"][char].htmlElement.parentElement.appendChild(gameData["processedCharacters"][char].htmlElement);
 	});
-
-	// console.log(chars);
 
 	return chars;
 }
@@ -685,8 +651,8 @@ async function buildCharacterCards(data) {
 	data["characters"].reverse().forEach(character => {
 		const element = character["element"],
 			weapon = character["weapon"],
-			icon = "Null_Icon.png",
-			// icon = character["icon"],
+			// icon = "Null_Icon.png",
+			icon = character["icon"],
 			name = shortNameMap(character["name"]),
 			star = character["rarity"],
 			patch = character["patch"];

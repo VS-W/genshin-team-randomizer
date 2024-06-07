@@ -5,7 +5,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="color-scheme" content="light dark">
-	<title>Test</title>
+	<title>Genshin Impact Team Randomizer</title>
 	<link rel="stylesheet" href="css/pico.indigo.css">
 	<link rel="stylesheet" href="css/style.css">
 	<script src="assets/fitty.min.js"></script>
@@ -13,9 +13,7 @@
 
 <body>
 	<main class="container">
-		<h1>Heading</h1>
-		<div id="generated-card-container"></div>
-
+		<h1>Genshin Impact Team Randomizer</h1>
 		<button id="generate-team-btn"><span>Generate</span></button>
 
 		<div id="team-type-selection-container">
@@ -31,6 +29,9 @@
 			</div>
 		</div>
 		<hr>
+
+		<div id="generated-card-container"></div>
+		
 		<details class="settings-container" open>
 			<summary class="settings-text">Traveler Settings:</summary>
 			<div class="grid">
@@ -119,23 +120,23 @@
 						</legend>
 						<fieldset id="target-selection">
 							<label>
-								<input type="checkbox" name="target-abyss">
+								<input type="checkbox" name="target-abyss" checked>
 								Abyss <span>(one of floors 9 - 12)</span>
 							</label>
 							<label>
-								<input type="checkbox" name="target-overworld">
+								<input type="checkbox" name="target-overworld" checked>
 								Overworld Boss
 							</label>
 							<label>
-								<input type="checkbox" name="target-weekly">
+								<input type="checkbox" name="target-weekly" checked>
 								Weekly Boss
 							</label>
 							<label>
-								<input type="checkbox" name="target-domain">
+								<input type="checkbox" name="target-domain" checked>
 								Normal Domain
 							</label>
 							<label>
-								<input type="checkbox" name="target-onetime-domain">
+								<input type="checkbox" name="target-onetime-domain" checked>
 								One-Time Domain
 							</label>
 						</fieldset>
@@ -152,7 +153,7 @@
 						</legend>
 						<fieldset>
 							<label class="en-btn" aria-disabled="true">
-								<input name="target-multiteam" type="checkbox" role="switch">
+								<input name="target-multiteam" type="checkbox" role="switch" checked>
 								<span>Enable</span>
 							</label>
 						</fieldset>
@@ -173,7 +174,7 @@
 					</legend>
 					<fieldset>
 						<label>
-							<input type="radio" name="random-weapon-type" value="disabled" checked>
+							<input type="radio" name="random-weapon-type" value="disabled">
 							Disabled
 						</label>
 						<label>
@@ -181,7 +182,7 @@
 							Random (single)
 						</label>
 						<label>
-							<input type="radio" name="random-weapon-type" value="random-varied">
+							<input type="radio" name="random-weapon-type" value="random-varied" checked>
 							Random (varied)
 						</label>
 					</fieldset>
