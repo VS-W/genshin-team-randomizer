@@ -219,7 +219,12 @@ function getRandomTarget() {
 		case "target-overworld":
 			return makeBossDisplay("overworld_bosses", randomFromArray(Object.keys(gameData["overworld_bosses"])));
 		case "target-weekly":
-			return makeBossDisplay("weekly_bosses", randomFromArray(Object.keys(gameData["weekly_bosses"])));
+			// Can't do Dvalin in co-op.
+			const possibleWeeklyBosses = Object.keys(gameData["weekly_bosses"]);
+			if (settings["team-type"] == "coop") {
+				possibleWeeklyBosses.splice(possibleWeeklyBosses.indexOf("Stormterror Dvalin"), 1);
+			}
+			return makeBossDisplay("weekly_bosses", randomFromArray(possibleWeeklyBosses));
 		case "target-domain":
 			const randomDomainType = randomFromArray(Object.keys(gameData["domains"]).filter(key => key !== "One-Time Domains"));
 			const targetDomain = randomFromArray(Object.keys(gameData["domains"][randomDomainType]));
