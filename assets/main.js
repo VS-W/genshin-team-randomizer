@@ -112,8 +112,20 @@ function generateTeam() {
 				makeGeneratedCard(blankChar, teamContainer, `${teamIndex}-${i + lastID}`);
 			}
 		}
-
 		container.appendChild(teamContainer);
+		let delay = 0;
+		container.querySelectorAll(".character-card").forEach(card => {
+			if (card.classList.contains("opacity-zero")) {
+				setTimeout(() => {
+					card.classList.remove("opacity-zero");
+					card.classList.add("rotate3d-appear");
+				}, delay);
+				delay += 100;
+				if (delay > 300) {
+					delay = 0;
+				}
+			}
+		});
 
 		if (!(settings["random-weapon-type"] == "disabled")) {
 			makeTeamWeaponInfobox(container);
@@ -127,13 +139,6 @@ function generateTeam() {
 		if (settings["target-multiteam"] && settings["targets"].length > 0) {
 			targetInfo = `${getRandomTarget()}`;
 		}
-
-		container.querySelectorAll(".character-card").forEach(card => {
-			setTimeout(() => {
-				card.classList.remove("opacity-zero");
-				card.classList.add("rotate3d-appear");
-			}, 100);
-		});
 	});
 
 	fitty(".generated-character-card-title-text", {

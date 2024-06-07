@@ -11,6 +11,10 @@ Can be used to quickly generate teams like:
 * release date/patch-restricted (e.g. only characters before 2022, or only characters released between patch 2.0 and 3.0)
 * multiple unique teams for back-to-back challenges
 
+### Examples:
+![Example 1](assets/examples/example1.png)
+![Example 2](assets/examples/example2.png)
+
 ## Type of Team to Generate
 - **Normal**
 
@@ -136,11 +140,5 @@ One of:
 - **Between**
 
 	+ Calendar for date input (2 for "between" date range).
-
-### Name
-+ Name starts with...
-+ Name includes...
-
-	(text input)
 
 ###### Character data/font/images belong to Hoyoverse, mostly extracted from the [character list on the unofficial wiki](https://genshin-impact.fandom.com/wiki/Character/List) since they have a neat table already. [Fitty](https://github.com/rikschennink/fitty) used for resizing text in the character cards. [pico](https://github.com/picocss/pico) used for styling components.
