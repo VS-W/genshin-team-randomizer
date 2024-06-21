@@ -1159,6 +1159,7 @@
             "Denouement of Sin": {
                 "name": "Denouement of Sin",
                 "location": [
+                    "Romaritime Harbor",
                     "Belleau Region"
                 ],
                 "region": "Fontaine"
@@ -1166,6 +1167,7 @@
             "Faded Theater": {
                 "name": "Faded Theater",
                 "location": [
+                    "Petrichor",
                     "Nostoi Region"
                 ],
                 "region": "Fontaine"
@@ -1211,6 +1213,7 @@
             "Slumbering Court": {
                 "name": "Slumbering Court",
                 "location": [
+                    "Fort Hiraumi",
                     "Seirai Island"
                 ],
                 "region": "Inazuma"
