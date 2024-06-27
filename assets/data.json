@@ -1011,6 +1011,17 @@
             "model": "Medium Male",
             "releasedate": "June 05, 2024",
             "patch": "4.7"
+        },
+        {
+            "icon": "Sigewinne_Icon.png",
+            "name": "Sigewinne",
+            "rarity": "5",
+            "element": "Hydro",
+            "weapon": "Bow",
+            "region": "Fontaine",
+            "model": "Short Female",
+            "releasedate": "June 25, 2024",
+            "patch": "4.7"
         }
     ],
     "region": [
