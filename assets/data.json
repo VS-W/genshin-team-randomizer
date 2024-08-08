@@ -1022,6 +1022,17 @@
             "model": "Short Female",
             "releasedate": "June 25, 2024",
             "patch": "4.7"
+        },
+        {
+            "icon": "Emilie_Icon.png",
+            "name": "Emilie",
+            "rarity": "5",
+            "element": "Dendro",
+            "weapon": "Polearm",
+            "region": "Fontaine",
+            "model": "Medium Female",
+            "releasedate": "August 06, 2024",
+            "patch": "4.8"
         }
     ],
     "region": [
@@ -1090,7 +1101,8 @@
         "4.4",
         "4.5",
         "4.6",
-        "4.7"
+        "4.7",
+        "4.8"
     ],
     "domains": {
         "Domains of Forgery": {
