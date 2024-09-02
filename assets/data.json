@@ -1033,6 +1033,28 @@
             "model": "Medium Female",
             "releasedate": "August 06, 2024",
             "patch": "4.8"
+        },
+        {
+            "icon": "Kachina_Icon.png",
+            "name": "Kachina",
+            "rarity": "4",
+            "element": "Geo",
+            "weapon": "Polearm",
+            "region": "Natlan",
+            "model": "Short Female",
+            "releasedate": "August 28, 2024",
+            "patch": "5.0"
+        },
+        {
+            "icon": "Mualani_Icon.png",
+            "name": "Mualani",
+            "rarity": "5",
+            "element": "Hydro",
+            "weapon": "Catalyst",
+            "region": "Natlan",
+            "model": "Medium Female",
+            "releasedate": "August 28, 2024",
+            "patch": "5.0"
         }
     ],
     "region": [
@@ -1102,10 +1124,18 @@
         "4.5",
         "4.6",
         "4.7",
-        "4.8"
+        "4.8",
+        "5.0"
     ],
     "domains": {
         "Domains of Forgery": {
+            "Ancient Watchtower": {
+                "name": "Ancient Watchtower",
+                "location": [
+                    "Coatepec Mountain"
+                ],
+                "region": "Natlan"
+            },
             "Cecilia Garden": {
                 "name": "Cecilia Garden",
                 "location": [
@@ -1233,6 +1263,13 @@
                 ],
                 "region": "Liyue"
             },
+            "Sanctum of Rainbow Spirits": {
+                "name": "Sanctum of Rainbow Spirits",
+                "location": [
+                    "Toyac Springs"
+                ],
+                "region": "Natlan"
+            },
             "Slumbering Court": {
                 "name": "Slumbering Court",
                 "location": [
@@ -1275,6 +1312,13 @@
             }
         },
         "Domains of Mastery": {
+            "Blazing Ruins": {
+                "name": "Blazing Ruins",
+                "location": [
+                    "Coatepec Mountain"
+                ],
+                "region": "Natlan"
+            },
             "Forsaken Rift": {
                 "name": "Forsaken Rift",
                 "location": [
@@ -1855,6 +1899,18 @@
             "location": "Nostoi Region",
             "region": "Fontaine",
             "icon": "Statue_of_Marble_and_Brass_Icon.png"
+        },
+        "Holawaqa Ngoubou": {
+            "name": "Holawaqa Ngoubou",
+            "location": "Huitztli Hill",
+            "region": "Natlan",
+            "icon": "Holawaqa_Ngoubou_Icon.png"
+        },
+        "Kongamato": {
+            "name": "Kongamato",
+            "location": "Tequemecan Valley",
+            "region": "Natlan",
+            "icon": "Kongamato_Icon.png"
         }
     }
 }
