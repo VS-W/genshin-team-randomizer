@@ -1055,6 +1055,17 @@
             "model": "Medium Female",
             "releasedate": "August 28, 2024",
             "patch": "5.0"
+        },
+        {
+            "icon": "Kinich_Icon.png",
+            "name": "Kinich",
+            "rarity": "5",
+            "element": "Dendro",
+            "weapon": "Claymore",
+            "region": "Natlan",
+            "model": "Medium Male",
+            "releasedate": "September 17, 2024",
+            "patch": "5.0"
         }
     ],
     "region": [
