@@ -1066,6 +1066,17 @@
             "model": "Medium Male",
             "releasedate": "September 17, 2024",
             "patch": "5.0"
+        },
+        {
+            "icon": "Xilonen_Icon.png",
+            "name": "Xilonen",
+            "rarity": "5",
+            "element": "Geo",
+            "weapon": "Sword",
+            "region": "Natlan",
+            "model": "Tall Female",
+            "releasedate": "October 09, 2024",
+            "patch": "5.1"
         }
     ],
     "region": [
@@ -1136,7 +1147,8 @@
         "4.6",
         "4.7",
         "4.8",
-        "5.0"
+        "5.0",
+        "5.1"
     ],
     "domains": {
         "Domains of Forgery": {
