@@ -1934,6 +1934,12 @@
             "location": "Tequemecan Valley",
             "region": "Natlan",
             "icon": "Kongamato_Icon.png"
+        },
+        "Secret Source Automaton: Configuration Device": {
+            "name": "Secret Source Automaton: Configuration Device",
+            "location": "Toyac Springs",
+            "region": "Natlan",
+            "icon": "Secret_Source_Automaton_Configuration_Device_Icon.png"
         }
     }
 }
