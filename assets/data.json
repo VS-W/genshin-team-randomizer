@@ -1077,6 +1077,28 @@
             "model": "Tall Female",
             "releasedate": "October 09, 2024",
             "patch": "5.1"
+        },
+        {
+            "icon": "Chasca_Icon.png",
+            "name": "Chasca",
+            "rarity": "5",
+            "element": "Anemo",
+            "weapon": "Bow",
+            "region": "Natlan",
+            "model": "Tall Female",
+            "releasedate": "November 20, 2024",
+            "patch": "5.2"
+        },
+        {
+            "icon": "Ororon_Icon.png",
+            "name": "Ororon",
+            "rarity": "4",
+            "element": "Electro",
+            "weapon": "Bow",
+            "region": "Natlan",
+            "model": "Tall Male",
+            "releasedate": "November 20, 2024",
+            "patch": "5.2"
         }
     ],
     "region": [
@@ -1148,7 +1170,8 @@
         "4.7",
         "4.8",
         "5.0",
-        "5.1"
+        "5.1",
+        "5.2"
     ],
     "domains": {
         "Domains of Forgery": {
@@ -1940,6 +1963,12 @@
             "location": "Toyac Springs",
             "region": "Natlan",
             "icon": "Secret_Source_Automaton_Configuration_Device_Icon.png"
+        },
+        "Tenebrous Papilla": {
+            "name": "Tenebrous Papilla",
+            "location": "Quahuacan Cliff",
+            "region": "Natlan",
+            "icon": "Tenebrous_Papilla_Icon.png"
         }
     }
 }
