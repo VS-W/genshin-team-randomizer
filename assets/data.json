@@ -1099,6 +1099,28 @@
             "model": "Tall Male",
             "releasedate": "November 20, 2024",
             "patch": "5.2"
+        },
+        {
+            "icon": "Citlali_Icon.png",
+            "name": "Citlali",
+            "rarity": "5",
+            "element": "Cryo",
+            "weapon": "Catalyst",
+            "region": "Natlan",
+            "model": "Medium Female",
+            "releasedate": "January 01, 2025",
+            "patch": "5.3"
+        },
+        {
+            "icon": "Mavuika_Icon.png",
+            "name": "Mavuika",
+            "rarity": "5",
+            "element": "Pyro",
+            "weapon": "Claymore",
+            "region": "Natlan",
+            "model": "Tall Female",
+            "releasedate": "January 01, 2025",
+            "patch": "5.3"
         }
     ],
     "region": [
@@ -1171,7 +1193,8 @@
         "4.8",
         "5.0",
         "5.1",
-        "5.2"
+        "5.2",
+        "5.3"
     ],
     "domains": {
         "Domains of Forgery": {
@@ -1479,6 +1502,7 @@
             "Altar of Mirages": {
                 "name": "Altar of Mirages",
                 "location": [
+                    "Mausoleum of King Deshret",
                     "Hypostyle Desert"
                 ],
                 "region": "Sumeru"
@@ -1689,6 +1713,13 @@
             "name": "Andrius",
             "location": "Wolvendom",
             "region": "Mondstadt"
+        },
+        "Lord of Eroded Primal Fire": {
+            "fullart": "",
+            "subtitle": "",
+            "name": "Lord of Eroded Primal Fire",
+            "location": "Tezcatepetonco Range",
+            "region": "Natlan"
         }
     },
     "overworld_bosses": {
@@ -1969,6 +2000,12 @@
             "location": "Quahuacan Cliff",
             "region": "Natlan",
             "icon": "Tenebrous_Papilla_Icon.png"
+        },
+        "Wayward Hermetic Spiritspeaker": {
+            "name": "Wayward Hermetic Spiritspeaker",
+            "location": "Tezcatepetonco Range",
+            "region": "Natlan",
+            "icon": "Wayward_Hermetic_Spiritspeaker_Icon.png"
         }
     }
 }
