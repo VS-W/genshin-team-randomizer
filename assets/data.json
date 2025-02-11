@@ -1121,6 +1121,17 @@
             "model": "Tall Female",
             "releasedate": "January 01, 2025",
             "patch": "5.3"
+        },
+        {
+            "icon": "Lan_Yan_Icon.png",
+            "name": "Lan Yan",
+            "rarity": "4",
+            "element": "Anemo",
+            "weapon": "Catalyst",
+            "region": "Liyue",
+            "model": "Medium Female",
+            "releasedate": "January 21, 2025",
+            "patch": "5.3"
         }
     ],
     "region": [
