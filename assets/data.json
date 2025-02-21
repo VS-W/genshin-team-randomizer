@@ -1132,6 +1132,17 @@
             "model": "Medium Female",
             "releasedate": "January 21, 2025",
             "patch": "5.3"
+        },
+        {
+            "icon": "Yumemizuki_Mizuki_Icon.png",
+            "name": "Yumemizuki Mizuki",
+            "rarity": "5",
+            "element": "Anemo",
+            "weapon": "Catalyst",
+            "region": "Inazuma",
+            "model": "Medium Female",
+            "releasedate": "February 12, 2025",
+            "patch": "5.4"
         }
     ],
     "region": [
@@ -1205,7 +1216,8 @@
         "5.0",
         "5.1",
         "5.2",
-        "5.3"
+        "5.3",
+        "5.4"
     ],
     "domains": {
         "Domains of Forgery": {
