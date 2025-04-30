@@ -31,7 +31,7 @@ def fetch(url, target, write=False):
 		return False
 
 def sourceData(output_dir = "assets/"):
-	# At the time of writing, region "Natlan" has no characters, and the "Short Male" mode type doesn't exist as playable character.
+	# At the time of writing, the "Short Male" mode type doesn't exist as playable character.
 	# Adding them by default for posterity.
 	output = {
 		"characters": [],
@@ -70,7 +70,6 @@ def sourceData(output_dir = "assets/"):
 				domains[outputline[0]][outputline[1]]["name"] = outputline[1]
 				domains[outputline[0]][outputline[1]]["location"] = outputline[2:-1]
 				domains[outputline[0]][outputline[1]]["region"] = outputline[-1]
-				# print(outputline[0], domains[outputline[0]])
 
 	output["domains"] = domains
 
@@ -144,20 +143,16 @@ def sourceData(output_dir = "assets/"):
 			if len(link.text):
 				outputline.append(link.text)
 		if outputline[0].strip() != "Trounce Domains":
-			# print(outputline)
 			if not outputline[0] in weekly_bosses:
 				weekly_bosses[outputline[0]] = {
 					"fullart": "",
 					"subtitle": ""
 				}
-				# print("added:", outputline[0])
 			weekly_bosses[outputline[0]]["name"] = outputline[0]
 			weekly_bosses[outputline[0]]["location"] = outputline[1]
 			weekly_bosses[outputline[0]]["region"] = outputline[2]
-			# print(outputline[0], weekly_bosses[outputline[0]])
 
 	output["weekly_bosses"] = weekly_bosses
-
 
 	overworld_bosses = {
 		"Anemo Hypostasis": {
@@ -266,19 +261,16 @@ def sourceData(output_dir = "assets/"):
 			if len(outputline) > 1:
 				if not outputline[0] in overworld_bosses:
 					overworld_bosses[outputline[0]] = {}
-				# overworld_bosses[outputline[0]] = {}
 				overworld_bosses[outputline[0]]["name"] = outputline[0]
 				overworld_bosses[outputline[0]]["location"] = outputline[1:-1][0]
 				overworld_bosses[outputline[0]]["region"] = outputline[-1]
 				overworld_bosses[outputline[0]]["icon"] = ""
 				src = row.find("img").get("data-src") or row.find("img").get("src")
-				# print(outputline[0])
 				if src:
 					icon_src = src.split("/revision")[0]
 					icon_file = icon_src.split("/")[-1:][0]
 					fetch(icon_src, output_dir + "icons/" + icon_file, write=True)
 					overworld_bosses[outputline[0]]["icon"] = icon_file
-				# print(outputline[0], overworld_bosses[outputline[0]])
 
 	output["overworld_bosses"] = overworld_bosses
 
@@ -309,15 +301,10 @@ def sourceData(output_dir = "assets/"):
 					img_data[icon_file] = icon_src
 			else:
 				img = cell.find("img")
-				title = img.get("title")
-				if title and "Stars" in title:
-					cell_text = title.strip().split(" ")[0]
-					data.append(title.strip().split(" ")[0])
-					src = img.get("data-src") or img.get("src")
-					icon_src = src.split("/revision")[0]
-					icon_file = icon_src.split("/")[-1:][0]
-					if "Icon_" in icon_file:
-						icon_file = icon_file.replace("Icon_", "").replace("_Stars", "")
+				title = img.get("data-image-key")
+				if "_Stars.png" in title:
+					cell_text = title.strip().split("_")[1]
+					data.append(cell_text)
 				else:
 					src = img.get("data-src") or img.get("src")
 					if src and "_Icon" in src:
@@ -433,8 +420,6 @@ def sourceData(output_dir = "assets/"):
 
 	with open(output_dir + "data.json", "w", encoding="utf-8") as f:
 		f.write(json.dumps(output, indent=4))
-
-	# print(json.dumps(output, indent=4))
 
 if __name__ == "__main__":
 	sourceData()
