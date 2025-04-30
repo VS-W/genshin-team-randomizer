@@ -1123,6 +1123,28 @@
             "patch": "5.3"
         },
         {
+            "rarity": "5",
+            "weapon": "Sword",
+            "element": "Pyro",
+            "patch": "5.3",
+            "releasedate": "January 01, 2025",
+            "region": "Natlan",
+            "name": "Traveler (Aether)",
+            "icon": "Aether_Icon.png",
+            "model": "Medium Male"
+        },
+        {
+            "rarity": "5",
+            "weapon": "Sword",
+            "element": "Pyro",
+            "patch": "5.3",
+            "releasedate": "January 01, 2025",
+            "region": "Natlan",
+            "name": "Traveler (Lumine)",
+            "icon": "Lumine_Icon.png",
+            "model": "Medium Female"
+        },
+        {
             "icon": "Lan_Yan_Icon.png",
             "name": "Lan Yan",
             "rarity": "4",
@@ -1768,8 +1790,11 @@
             "region": "Mondstadt"
         },
         "Lord of Eroded Primal Fire": {
-            "fullart": "",
-            "subtitle": "",
+            "fullart": "Lord_of_Eroded_Primal_Fire.png",
+            "subtitle": "The Slain Dragon Molded",
+            "color": [
+                "pyro"
+            ],
             "name": "Lord of Eroded Primal Fire",
             "location": "Tezcatepetonco Range",
             "region": "Natlan"
@@ -1867,10 +1892,10 @@
             "icon": "Solitary_Suanni_Icon.png"
         },
         "Maguu Kenki": {
-			"color": [
-				"anemo",
-				"cryo"
-			],
+            "color": [
+                "anemo",
+                "cryo"
+            ],
             "name": "Maguu Kenki",
             "location": "Serpent's Head",
             "region": "Inazuma",
@@ -2034,36 +2059,54 @@
             "icon": "Statue_of_Marble_and_Brass_Icon.png"
         },
         "Holawaqa Ngoubou": {
+            "color": [
+                "pyro"
+            ],
             "name": "Holawaqa Ngoubou",
             "location": "Huitztli Hill",
             "region": "Natlan",
             "icon": "Holawaqa_Ngoubou_Icon.png"
         },
         "Kongamato": {
+            "color": [
+                "dendro"
+            ],
             "name": "Kongamato",
             "location": "Tequemecan Valley",
             "region": "Natlan",
             "icon": "Kongamato_Icon.png"
         },
         "Secret Source Automaton: Configuration Device": {
+            "color": [
+                ""
+            ],
             "name": "Secret Source Automaton: Configuration Device",
             "location": "Toyac Springs",
             "region": "Natlan",
             "icon": "Secret_Source_Automaton_Configuration_Device_Icon.png"
         },
         "Tenebrous Papilla": {
+            "color": [
+                ""
+            ],
             "name": "Tenebrous Papilla",
             "location": "Quahuacan Cliff",
             "region": "Natlan",
             "icon": "Tenebrous_Papilla_Icon.png"
         },
         "Wayward Hermetic Spiritspeaker": {
+            "color": [
+                "cryo"
+            ],
             "name": "Wayward Hermetic Spiritspeaker",
             "location": "Tezcatepetonco Range",
             "region": "Natlan",
             "icon": "Wayward_Hermetic_Spiritspeaker_Icon.png"
         },
         "Lava Dragon Statue": {
+            "color": [
+                "pyro"
+            ],
             "name": "Lava Dragon Statue",
             "location": "Atocpan",
             "region": "Natlan",
