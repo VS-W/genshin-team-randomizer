@@ -1143,6 +1143,28 @@
             "model": "Medium Female",
             "releasedate": "February 12, 2025",
             "patch": "5.4"
+        },
+        {
+            "icon": "Iansan_Icon.png",
+            "name": "Iansan",
+            "rarity": "4",
+            "element": "Electro",
+            "weapon": "Polearm",
+            "region": "Natlan",
+            "model": "Short Female",
+            "releasedate": "March 26, 2025",
+            "patch": "5.5"
+        },
+        {
+            "icon": "Varesa_Icon.png",
+            "name": "Varesa",
+            "rarity": "5",
+            "element": "Electro",
+            "weapon": "Catalyst",
+            "region": "Natlan",
+            "model": "Medium Female",
+            "releasedate": "March 26, 2025",
+            "patch": "5.5"
         }
     ],
     "region": [
@@ -1217,7 +1239,8 @@
         "5.1",
         "5.2",
         "5.3",
-        "5.4"
+        "5.4",
+        "5.5"
     ],
     "domains": {
         "Domains of Forgery": {
@@ -1269,6 +1292,13 @@
             }
         },
         "Domains of Blessing": {
+            "Derelict Masonry Dock": {
+                "name": "Derelict Masonry Dock",
+                "location": [
+                    "Atocpan"
+                ],
+                "region": "Natlan"
+            },
             "Domain of Guyun": {
                 "name": "Domain of Guyun",
                 "location": [
@@ -1837,7 +1867,10 @@
             "icon": "Solitary_Suanni_Icon.png"
         },
         "Maguu Kenki": {
-            "color": [],
+			"color": [
+				"anemo",
+				"cryo"
+			],
             "name": "Maguu Kenki",
             "location": "Serpent's Head",
             "region": "Inazuma",
@@ -2029,6 +2062,12 @@
             "location": "Tezcatepetonco Range",
             "region": "Natlan",
             "icon": "Wayward_Hermetic_Spiritspeaker_Icon.png"
+        },
+        "Lava Dragon Statue": {
+            "name": "Lava Dragon Statue",
+            "location": "Atocpan",
+            "region": "Natlan",
+            "icon": "Lava_Dragon_Statue_Icon.png"
         }
     }
 }

@@ -129,7 +129,12 @@ def sourceData(output_dir = "assets/"):
 			"fullart": "Andrius.png",
 			"subtitle": "Dominator of Wolves",
 			"color": ["anemo", "cryo"]
-		}
+		},
+        "Lord of Eroded Primal Fire": {
+            "fullart": "Lord_of_Eroded_Primal_Fire.png",
+            "subtitle": "The Slain Dragon Molded",
+			"color": ["pyro"]
+        }
 	}
 
 	weekly_boss_list_url = "https://genshin-impact.fandom.com/wiki/Weekly_Boss"
@@ -186,7 +191,10 @@ def sourceData(output_dir = "assets/"):
 			"color": ["anemo"]
 		},
 		"Maguu Kenki": {
-			"color": []
+            "color": [
+                "anemo",
+                "cryo"
+            ],
 		},
 		"Perpetual Mechanical Array": {
 			"color": []
@@ -244,7 +252,25 @@ def sourceData(output_dir = "assets/"):
 		},
 		"Statue of Marble and Brass": {
 			"color": ["geo"]
-		}
+		},
+        "Holawaqa Ngoubou": {
+			"color": ["pyro"]
+        },
+        "Kongamato": {
+			"color": ["dendro"]
+        },
+        "Secret Source Automaton: Configuration Device": {
+			"color": [""]
+        },
+        "Tenebrous Papilla": {
+			"color": [""]
+        },
+        "Wayward Hermetic Spiritspeaker": {
+			"color": ["cryo"]
+        },
+        "Lava Dragon Statue": {
+			"color": ["pyro"]
+        }
 	}
 
 	overworld_boss_list_url = "https://genshin-impact.fandom.com/wiki/Normal_Boss"
@@ -345,6 +371,12 @@ def sourceData(output_dir = "assets/"):
 			}
 		],
 		"element": [
+			{
+				"element": "Pyro",
+				"patch": "5.3",
+				"releasedate": "January 01, 2025",
+				"region": "Natlan"
+			},
 			{
 				"element": "Hydro",
 				"patch": "4.0",
