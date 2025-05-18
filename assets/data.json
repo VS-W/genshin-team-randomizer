@@ -1187,6 +1187,28 @@
             "model": "Medium Female",
             "releasedate": "March 26, 2025",
             "patch": "5.5"
+        },
+        {
+            "icon": "Escoffier_Icon.png",
+            "name": "Escoffier",
+            "rarity": "5",
+            "element": "Cryo",
+            "weapon": "Polearm",
+            "region": "Fontaine",
+            "model": "Medium Female",
+            "releasedate": "May 07, 2025",
+            "patch": "5.6"
+        },
+        {
+            "icon": "Ifa_Icon.png",
+            "name": "Ifa",
+            "rarity": "4",
+            "element": "Anemo",
+            "weapon": "Catalyst",
+            "region": "Natlan",
+            "model": "Tall Male",
+            "releasedate": "May 07, 2025",
+            "patch": "5.6"
         }
     ],
     "region": [
@@ -1262,7 +1284,8 @@
         "5.2",
         "5.3",
         "5.4",
-        "5.5"
+        "5.5",
+        "5.6"
     ],
     "domains": {
         "Domains of Forgery": {
@@ -1798,6 +1821,13 @@
             "name": "Lord of Eroded Primal Fire",
             "location": "Tezcatepetonco Range",
             "region": "Natlan"
+        },
+        "The Game Before the Gate": {
+            "fullart": "",
+            "subtitle": "",
+            "name": "The Game Before the Gate",
+            "location": "Falcon Coast",
+            "region": "Mondstadt"
         }
     },
     "overworld_bosses": {
@@ -2111,6 +2141,12 @@
             "location": "Atocpan",
             "region": "Natlan",
             "icon": "Lava_Dragon_Statue_Icon.png"
+        },
+        "Secret Source Automaton: Overseer Device": {
+            "name": "Secret Source Automaton: Overseer Device",
+            "location": "Atocpan",
+            "region": "Natlan",
+            "icon": "Secret_Source_Automaton_Overseer_Device_Icon.png"
         }
     }
 }
