@@ -1823,8 +1823,12 @@
             "region": "Natlan"
         },
         "The Game Before the Gate": {
-            "fullart": "",
-            "subtitle": "",
+            "fullart": "The_Game_Before_the_Gate.png",
+            "subtitle": "Not the One Who Plays at 'Chess Games'",
+            "color": [
+                "pyro",
+                "hydro"
+            ],
             "name": "The Game Before the Gate",
             "location": "Falcon Coast",
             "region": "Mondstadt"

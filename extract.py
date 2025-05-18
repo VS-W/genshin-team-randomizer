@@ -41,7 +41,7 @@ def sourceData(output_dir = "assets/"):
 		"model": ["Short Male"],
 		"patch": []
 	}
-	
+
 	existing_icons = []
 	if os.path.exists(output_dir + "icons"):
 		existing_icons = os.listdir(output_dir + "icons")
@@ -130,11 +130,16 @@ def sourceData(output_dir = "assets/"):
 			"subtitle": "Dominator of Wolves",
 			"color": ["anemo", "cryo"]
 		},
-        "Lord of Eroded Primal Fire": {
-            "fullart": "Lord_of_Eroded_Primal_Fire.png",
-            "subtitle": "The Slain Dragon Molded",
-			"color": ["pyro"]
-        }
+	        "Lord of Eroded Primal Fire": {
+	            "fullart": "Lord_of_Eroded_Primal_Fire.png",
+	            "subtitle": "The Slain Dragon Molded",
+				"color": ["pyro"]
+	        },
+	        "The Game Before the Gate": {
+	            "fullart": "The_Game_Before_the_Gate.png",
+		    "subtitle": "Not the One Who Plays at 'Chess Games'",
+		    "color": ["pyro", "hydro"]
+		}
 	}
 
 	weekly_boss_list_url = "https://genshin-impact.fandom.com/wiki/Weekly_Boss"
