@@ -1209,6 +1209,28 @@
             "model": "Tall Male",
             "releasedate": "May 07, 2025",
             "patch": "5.6"
+        },
+        {
+            "icon": "Dahlia_Icon.png",
+            "name": "Dahlia",
+            "rarity": "4",
+            "element": "Hydro",
+            "weapon": "Sword",
+            "region": "Mondstadt",
+            "model": "Medium Male",
+            "releasedate": "June 18, 2025",
+            "patch": "5.7"
+        },
+        {
+            "icon": "Skirk_Icon.png",
+            "name": "Skirk",
+            "rarity": "5",
+            "element": "Cryo",
+            "weapon": "Sword",
+            "region": "None",
+            "model": "Medium Female",
+            "releasedate": "June 18, 2025",
+            "patch": "5.7"
         }
     ],
     "region": [
@@ -1285,7 +1307,8 @@
         "5.3",
         "5.4",
         "5.5",
-        "5.6"
+        "5.6",
+        "5.7"
     ],
     "domains": {
         "Domains of Forgery": {
